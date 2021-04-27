@@ -14,6 +14,8 @@
 		0C3D8D7D263641DE00F1CC59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C3D8D7C263641DE00F1CC59 /* Assets.xcassets */; };
 		0C3D8D80263641DE00F1CC59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C3D8D7E263641DE00F1CC59 /* LaunchScreen.storyboard */; };
 		0C7FCAD226374F2200DF3D5C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7FCAD126374F2200DF3D5C /* LoginViewController.swift */; };
+		0CCDA9D12637990100F25E2F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA9D02637990100F25E2F /* MapViewController.swift */; };
+		0CCDA9D326379AD900F25E2F /* MapViewControllerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCDA9D226379AD900F25E2F /* MapViewControllerList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		0C3D8D7F263641DE00F1CC59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C3D8D81263641DE00F1CC59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C7FCAD126374F2200DF3D5C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0CCDA9D02637990100F25E2F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		0CCDA9D226379AD900F25E2F /* MapViewControllerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				0C7FCAD126374F2200DF3D5C /* LoginViewController.swift */,
+				0CCDA9D02637990100F25E2F /* MapViewController.swift */,
+				0CCDA9D226379AD900F25E2F /* MapViewControllerList.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -167,7 +173,9 @@
 			files = (
 				0C7FCAD226374F2200DF3D5C /* LoginViewController.swift in Sources */,
 				0C3D8D78263641DC00F1CC59 /* ViewController.swift in Sources */,
+				0CCDA9D12637990100F25E2F /* MapViewController.swift in Sources */,
 				0C3D8D74263641DC00F1CC59 /* AppDelegate.swift in Sources */,
+				0CCDA9D326379AD900F25E2F /* MapViewControllerList.swift in Sources */,
 				0C3D8D76263641DC00F1CC59 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
