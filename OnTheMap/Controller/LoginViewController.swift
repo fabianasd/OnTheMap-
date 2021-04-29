@@ -24,9 +24,25 @@ class LoginViewController: UIViewController {
         passwordTextField.text = ""
     }
     
-//    @IBAction func loginTapped(_ sender: UIButton) {
-//        performSegue(withIdentifier: "completeLogin", sender: nil)
-//        //              TMDBClient.getRequestToken(completion: handleRequestTokenResponse(success: error:))
-//    }
+    @IBAction func login(_ sender: UIButton) {
+        print("aqi login")
+        OTMUser.createSessionId(username: self.emailTextField.text ?? "",
+                                password: self.passwordTextField.text ?? "",
+                                completion: self.handleLoginResponse(success:error:))
+    }
+    
+    func handleLoginResponse(success: Bool, error: Error?) {
+        if success {
+            OTMUser.createSessionId(username: self.emailTextField.text ?? "",
+                                           password: self.passwordTextField.text ?? "",
+                                           completion: self.handleLoginResponse(success:error:))        }
+    }
+    
+    func handleSessionResponse(success: Bool, error: Error?) {
+        if success {
+            print("aqui handleSession")
+            self.performSegue(withIdentifier: "completeLogin", sender: nil)
+        }
+    }
 }
 

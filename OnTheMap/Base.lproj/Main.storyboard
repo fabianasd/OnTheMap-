@@ -58,7 +58,7 @@
                                         <color key="tintColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Login"/>
                                         <connections>
-                                            <segue destination="UHP-fi-p5I" kind="modal" id="vK1-bp-dKN"/>
+                                            <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ugz-db-wVS"/>
                                         </connections>
                                     </button>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="gOk-5T-8Vc">
@@ -97,6 +97,7 @@
                         <outlet property="loginButton" destination="Z0L-Ca-nb6" id="HkG-w3-0vL"/>
                         <outlet property="loginFacebook" destination="q0r-OQ-rVo" id="75w-72-4ht"/>
                         <outlet property="passwordTextField" destination="KJh-Vb-wrd" id="Yjj-eb-nbf"/>
+                        <segue destination="UHP-fi-p5I" kind="presentation" id="rfU-ab-B7U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -158,7 +159,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNP-at-Ybw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3103" y="58"/>
+            <point key="canvasLocation" x="-3103.1999999999998" y="57.635467980295566"/>
         </scene>
         <!--Map View Controller List-->
         <scene sceneID="yXl-M5-SAc">
