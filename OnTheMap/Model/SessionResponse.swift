@@ -10,12 +10,12 @@ import Foundation
 
 struct SessionResponse: Codable {
     
-    let expiration: String
-    let id: String
+    let registred: String
+    let key: String
 
 //havia muitas propriedades, bem como uma enumeracao de chaves de codificacao para cada uma
     enum CodingKeys: String, CodingKey {
-        case expiration
-        case id
+        case registred
+        case key
     }
 }

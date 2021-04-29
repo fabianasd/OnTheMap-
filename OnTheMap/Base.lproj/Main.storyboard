@@ -48,7 +48,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="completeLogin" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0L-Ca-nb6" userLabel="Login Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0L-Ca-nb6" userLabel="Login Button">
                                         <rect key="frame" x="0.0" y="311.66666666666663" width="343" height="35"/>
                                         <color key="backgroundColor" red="0.12697824835777283" green="0.62918651103973389" blue="0.94080913066864014" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -58,7 +58,7 @@
                                         <color key="tintColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Login"/>
                                         <connections>
-                                            <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ugz-db-wVS"/>
+                                            <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="omK-TQ-rOF"/>
                                         </connections>
                                     </button>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="gOk-5T-8Vc">
@@ -97,7 +97,7 @@
                         <outlet property="loginButton" destination="Z0L-Ca-nb6" id="HkG-w3-0vL"/>
                         <outlet property="loginFacebook" destination="q0r-OQ-rVo" id="75w-72-4ht"/>
                         <outlet property="passwordTextField" destination="KJh-Vb-wrd" id="Yjj-eb-nbf"/>
-                        <segue destination="UHP-fi-p5I" kind="presentation" id="rfU-ab-B7U"/>
+                        <segue destination="UHP-fi-p5I" kind="presentation" identifier="completeLogin" id="rfU-ab-B7U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

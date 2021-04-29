@@ -10,6 +10,7 @@
 		0C33F3AE263A364A0086FA15 /* OTMUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C33F3AD263A364A0086FA15 /* OTMUser.swift */; };
 		0C33F3B0263A3FA70086FA15 /* SessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C33F3AF263A3FA70086FA15 /* SessionResponse.swift */; };
 		0C33F3B2263A47920086FA15 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C33F3B1263A47920086FA15 /* LoginRequest.swift */; };
+		0C33F3B4263A601B0086FA15 /* PostSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C33F3B3263A601B0086FA15 /* PostSession.swift */; };
 		0C3D8D74263641DC00F1CC59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3D8D73263641DC00F1CC59 /* AppDelegate.swift */; };
 		0C3D8D76263641DC00F1CC59 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3D8D75263641DC00F1CC59 /* SceneDelegate.swift */; };
 		0C3D8D78263641DC00F1CC59 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3D8D77263641DC00F1CC59 /* ViewController.swift */; };
@@ -25,6 +26,7 @@
 		0C33F3AD263A364A0086FA15 /* OTMUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMUser.swift; sourceTree = "<group>"; };
 		0C33F3AF263A3FA70086FA15 /* SessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResponse.swift; sourceTree = "<group>"; };
 		0C33F3B1263A47920086FA15 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		0C33F3B3263A601B0086FA15 /* PostSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSession.swift; sourceTree = "<group>"; };
 		0C3D8D70263641DC00F1CC59 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C3D8D73263641DC00F1CC59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C3D8D75263641DC00F1CC59 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				0C33F3AD263A364A0086FA15 /* OTMUser.swift */,
 				0C33F3AF263A3FA70086FA15 /* SessionResponse.swift */,
 				0C33F3B1263A47920086FA15 /* LoginRequest.swift */,
+				0C33F3B3263A601B0086FA15 /* PostSession.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C33F3B4263A601B0086FA15 /* PostSession.swift in Sources */,
 				0C33F3B2263A47920086FA15 /* LoginRequest.swift in Sources */,
 				0C7FCAD226374F2200DF3D5C /* LoginViewController.swift in Sources */,
 				0C3D8D78263641DC00F1CC59 /* ViewController.swift in Sources */,
