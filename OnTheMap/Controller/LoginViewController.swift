@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
     
     func handleLoginResponse(success: Bool, error: Error?) {
             print("handleLoginResponse")
-            OTMUser.createSessionId(completion: handleSessionResponse(success:error:))
+            OTMUser.createSessionId(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleSessionResponse(success:error:))
     }
     
     func handleSessionResponse(success: Bool, error: Error?) {

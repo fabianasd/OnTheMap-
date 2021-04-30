@@ -15,7 +15,6 @@ class OTMUser {
     
     struct Auth {
         static var account = 0
-        // static var requestToken = ""
         static var id = ""
     }
     
@@ -27,9 +26,8 @@ class OTMUser {
         
         var stringValue: String {
             switch self {
-            case .createSessionId: return Enpoints.base + "/session\(Auth.id)"
-            // case .login: return Enpoints.base + "/users/\(OTMUser.key)"
-            case .login: return Enpoints.base + "/users/\(Auth.id)"
+            case .createSessionId: return Enpoints.base + "/session"
+            case .login: return Enpoints.base + "/users/\(OTMUser.key)"
             }
         }
         var url: URL {
@@ -45,38 +43,47 @@ class OTMUser {
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error...
-                return
+                completion(false, error)
             }
             let range = 5..<data!.count //Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
             print(String(data: newData!, encoding: .utf8)!)
+            completion(true, nil)
         }
         task.resume()
     }
     
-    class func createSessionId(completion: @escaping (Bool, Error?) -> Void) {
-        //class func createSessionId(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
+    class func createSessionId(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         print("createSessionId")
         //   var request = URLRequest(url: Enpoints.createSessionId.url)
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
-        //   print(Enpoints.createSessionId.url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        request.httpBody = "{\"udacity\": {\"username\": \"account@domain.com\", \"password\": \"********\"}}".data(using: .utf8)
+        request.httpBody =
+            ("{" +
+                "\"udacity\": " +
+                "{" +
+                    "\"username\":\"\(username)\"," +
+                    "\"password\": \"\(password)\"" +
+                "}" +
+             "}").data(using: .utf8)
         
-        //        let body = PostSession(expiration: OTMUser)
-        //        request.httpBody = try! JSONEncoder().encode(body)
-        //
-        // let session = URLSession.shared
+        //request.httpBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: .utf8)
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…
-                return
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
             }
             let range = 5..<data!.count //Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
             print(String(data: newData!, encoding: .utf8)!)
+            DispatchQueue.main.async {
+                completion((data != nil), error)
+            }
         }
         task.resume()
     }

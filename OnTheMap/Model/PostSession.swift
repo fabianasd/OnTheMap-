@@ -11,7 +11,6 @@ struct PostSession: Codable {
         let expiration: String
         let id: String
 
-    //havia muitas propriedades, bem como uma enumeracao de chaves de codificacao para cada uma
         enum CodingKeys: String, CodingKey {
             case expiration
             case id
