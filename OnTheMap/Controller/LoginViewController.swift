@@ -26,18 +26,18 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginTapped(_ sender: UIButton) {
         print("aqi login")
-      //  OTMUser.createSessionId(completion: handleLoginResponse(success:error:))
+        //  OTMUser.createSessionId(completion: handleLoginResponse(success:error:))
         OTMUser.login(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: self.handleLoginResponse(success:error:))
     }
     
     func handleLoginResponse(success: Bool, error: Error?) {
-            print("handleLoginResponse")
-            OTMUser.createSessionId(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleSessionResponse(success:error:))
+        print("handleLoginResponse")
+        OTMUser.createSessionId(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleSessionResponse(success:error:))
     }
     
     func handleSessionResponse(success: Bool, error: Error?) {
-            print("aqui handleSessionResponse")
-            self.performSegue(withIdentifier: "completeLogin", sender: nil)
+        print("aqui handleSessionResponse")
+        self.performSegue(withIdentifier: "completeLogin", sender: nil)
     }
 }
 

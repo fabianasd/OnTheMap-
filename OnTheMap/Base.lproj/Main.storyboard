@@ -135,6 +135,9 @@
                             </tabBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cQD-Ut-hzl">
                                 <rect key="frame" x="0.0" y="56" width="375" height="570"/>
+                                <connections>
+                                    <outlet property="delegate" destination="UHP-fi-p5I" id="fiJ-qY-Rdh"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -156,6 +159,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="kdv-d6-Rgh"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="cQD-Ut-hzl" id="fRD-0f-Aow"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNP-at-Ybw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

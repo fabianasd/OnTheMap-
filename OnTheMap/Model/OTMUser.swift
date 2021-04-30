@@ -12,6 +12,8 @@ import UIKit
 class OTMUser {
     
     static let key = ""
+    static let limit = "100"
+    static let skip = "400"
     
     struct Auth {
         static var account = 0
@@ -20,14 +22,20 @@ class OTMUser {
     
     enum Enpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
+        static let limit = "?limit=\(OTMUser.limit)"
+        static let skip = "?limit=\(OTMUser.limit)" + "&skip=\(OTMUser.skip)"
+        static let order = "?order=-updateAt"
         
-        case createSessionId
+        
         case login
+        case createSessionId
+   //     case limit
         
         var stringValue: String {
             switch self {
-            case .createSessionId: return Enpoints.base + "/session"
             case .login: return Enpoints.base + "/users/\(OTMUser.key)"
+            case .createSessionId: return Enpoints.base + "/session"
+      //      case .studentLocation: return Enpoints.base + "/StudentLocation"
             }
         }
         var url: URL {
@@ -54,9 +62,8 @@ class OTMUser {
     }
     
     class func createSessionId(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
-        print("createSessionId")
-        //   var request = URLRequest(url: Enpoints.createSessionId.url)
-        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
+        var request = URLRequest(url: Enpoints.createSessionId.url)
+        //  var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -65,10 +72,10 @@ class OTMUser {
             ("{" +
                 "\"udacity\": " +
                 "{" +
-                    "\"username\":\"\(username)\"," +
-                    "\"password\": \"\(password)\"" +
+                "\"username\":\"\(username)\"," +
+                "\"password\": \"\(password)\"" +
                 "}" +
-             "}").data(using: .utf8)
+                "}").data(using: .utf8)
         
         //request.httpBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: .utf8)
         
@@ -84,6 +91,18 @@ class OTMUser {
             DispatchQueue.main.async {
                 completion((data != nil), error)
             }
+        }
+        task.resume()
+    }
+    
+    class func studanteLocation(completion: @escaping (Bool, Error?) -> Void) {
+        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if error != nil { // Handle error...
+                return
+            }
+            print(String(data: data!, encoding: .utf8)!)
         }
         task.resume()
     }
