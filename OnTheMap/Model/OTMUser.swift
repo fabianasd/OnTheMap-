@@ -12,8 +12,6 @@ import UIKit
 class OTMUser {
     
     static let key = ""
-    static let limit = "100"
-    static let skip = "400"
     
     struct Auth {
         static var account = 0
@@ -22,20 +20,16 @@ class OTMUser {
     
     enum Enpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
-        static let limit = "?limit=\(OTMUser.limit)"
-        static let skip = "?limit=\(OTMUser.limit)" + "&skip=\(OTMUser.skip)"
-        static let order = "?order=-updateAt"
-        
         
         case login
         case createSessionId
-   //     case limit
+        case studentLocation
         
         var stringValue: String {
             switch self {
             case .login: return Enpoints.base + "/users/\(OTMUser.key)"
             case .createSessionId: return Enpoints.base + "/session"
-      //      case .studentLocation: return Enpoints.base + "/StudentLocation"
+            case .studentLocation: return Enpoints.base + "/StudentLocation?order=-updateAt"
             }
         }
         var url: URL {
@@ -95,12 +89,14 @@ class OTMUser {
         task.resume()
     }
     
-    class func studanteLocation(completion: @escaping (Bool, Error?) -> Void) {
-        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
+    class func studentLocation(completion: @escaping (Bool, Error?) -> Void) {
+        let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error...
-                return
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
             }
             print(String(data: data!, encoding: .utf8)!)
         }
