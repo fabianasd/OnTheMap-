@@ -89,16 +89,34 @@ class OTMUser {
         task.resume()
     }
     
-    class func studentLocation(completion: @escaping (Bool, Error?) -> Void) {
+    class func studentLocation(completion: @escaping ([Map], Bool, Error?) -> Void) {
+        print("studentLocation")
         let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
         let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
+        let task = session.dataTask(with: request) { data, response, error  in
             if error != nil { // Handle error...
                 DispatchQueue.main.async {
-                    completion(false, error)
+                    completion([], false, error)
                 }
             }
             print(String(data: data!, encoding: .utf8)!)
+            
+            let decoder = JSONDecoder()
+            
+            do {
+                let responseObject = try decoder.decode(MapResponse.self, from: data!)
+                DispatchQueue.main.async {
+                    completion(responseObject.results, true, nil)
+                }
+            }
+            catch {
+                print(error)
+                //... falhar
+                DispatchQueue.main.async {
+                    completion([], false, error)
+                }
+            }
+            
         }
         task.resume()
     }

@@ -5,7 +5,6 @@
 //  Created by Fabiana Petrovick on 26/04/21.
 //  Copyright © 2021 Fabiana Petrovick. All rights reserved.
 //
-
 import UIKit
 import MapKit
 
@@ -75,7 +74,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
 //        func mapViewList(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//    
+//
 //            if control == annotationView.rightCalloutAccessoryView {
 //                let app = UIApplication.shared
 //                app.openURL(NSURL(string: (annotationView.annotation?.subtitle!!)!)! as URL)

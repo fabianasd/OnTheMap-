@@ -26,7 +26,6 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginTapped(_ sender: UIButton) {
         print("aqi login")
-        //  OTMUser.createSessionId(completion: handleLoginResponse(success:error:))
         OTMUser.login(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: self.handleLoginResponse(success:error:))
     }
     
