@@ -9,7 +9,6 @@
 import Foundation
 struct Map: Codable, Equatable {
     
-    let posterPath: String?
     let createdAt: String
     let firstName: String
     let lastName: String
@@ -28,7 +27,6 @@ struct Map: Codable, Equatable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case posterPath
         case createdAt
         case firstName
         case lastName

@@ -23,13 +23,15 @@ class OTMUser {
         
         case login
         case createSessionId
-        case studentLocation
+        case getStudentLocation
+        case postStudentLocation
         
         var stringValue: String {
             switch self {
             case .login: return Enpoints.base + "/users/\(OTMUser.key)"
             case .createSessionId: return Enpoints.base + "/session"
-            case .studentLocation: return Enpoints.base + "/StudentLocation?order=-updateAt"
+            case .getStudentLocation: return Enpoints.base + "/StudentLocation?order=-updateAt"
+            case .postStudentLocation: return Enpoints.base + "/StudentLocation"
             }
         }
         var url: URL {
@@ -55,6 +57,7 @@ class OTMUser {
         task.resume()
     }
     
+    //post
     class func createSessionId(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         var request = URLRequest(url: Enpoints.createSessionId.url)
         //  var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
@@ -89,9 +92,12 @@ class OTMUser {
         task.resume()
     }
     
-    class func studentLocation(completion: @escaping ([Map], Bool, Error?) -> Void) {
+    //get
+    class func getStudentLocation(completion: @escaping ([Map], Bool, Error?) -> Void) {
         print("studentLocation")
-        let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
+        var request = URLRequest(url: Enpoints.getStudentLocation.url)
+        print(Enpoints.getStudentLocation.url)
+        // let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error  in
             if error != nil { // Handle error...
@@ -117,6 +123,25 @@ class OTMUser {
                 }
             }
             
+        }
+        task.resume()
+    }
+    
+ //post
+    class func postStudentLocation(createdAt: String, firstName: String, lastName: String, latitude: Double, longitude: Double, mapString: String, mediaString: String?, mediaURL: String, objectId: String, uniqueKey: String, updatedAt: String, completion: @escaping (Bool, Error?) -> Void) {
+        // var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
+        var request = URLRequest(url: Enpoints.postStudentLocation.url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".data(using: .utf8)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if error != nil { // Handle error…
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
+            print(String(data: data!, encoding: .utf8)!)
         }
         task.resume()
     }

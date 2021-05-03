@@ -114,7 +114,6 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fnd-kR-sXD">
                                 <rect key="frame" x="0.0" y="56" width="375" height="542"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MapTableViewCell" id="LBx-7g-gJN">
                                         <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
@@ -230,10 +229,10 @@
             </objects>
             <point key="canvasLocation" x="-2426" y="-312"/>
         </scene>
-        <!--View Controller-->
+        <!--Editing Location-->
         <scene sceneID="8Ur-kS-Ir4">
             <objects>
-                <viewController id="nl5-J1-4XH" sceneMemberID="viewController">
+                <viewController id="nl5-J1-4XH" customClass="EditingLocation" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EgD-dD-Y5V">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
