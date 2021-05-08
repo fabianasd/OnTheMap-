@@ -51,7 +51,7 @@ extension MapViewControllerList: UITableViewDataSource, UITableViewDelegate {
       //  cell.isHidden = false
         let map = MapModel.maplist[indexPath.row]
 
-        cell.textLabel?.text = map.firstName == "" ? map.lastName : map.firstName
+        cell.textLabel?.text = map.firstName// == "" ? map.lastName : map.firstName
         cell.imageView?.image = UIImage(named: "icon_pin")
         
         return cell

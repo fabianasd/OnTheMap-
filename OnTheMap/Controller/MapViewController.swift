@@ -73,13 +73,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-//        func mapViewList(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//
-//            if control == annotationView.rightCalloutAccessoryView {
-//                let app = UIApplication.shared
-//                app.openURL(NSURL(string: (annotationView.annotation?.subtitle!!)!)! as URL)
-//            }
-//        }
+    //        func mapViewList(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    //
+    //            if control == annotationView.rightCalloutAccessoryView {
+    //                let app = UIApplication.shared
+    //                app.openURL(NSURL(string: (annotationView.annotation?.subtitle!!)!)! as URL)
+    //            }
+    //        }
     
     // MARK: - Sample Data
     
@@ -133,4 +133,32 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         ]
     }
     
+    @IBAction func editingLocation(success: Bool, error: Error?) {
+        print("editingLocation")
+        if success {
+            print("resposta ok")
+            self.performSegue(withIdentifier: "Location", sender: nil)
+        } else { //valida email e senha
+            showLoginFailure(message: error?.localizedDescription ?? "")
+        }
+    }
+    
+    func showLoginFailure(message: String) {
+        print("aqui no editingLocation ")
+        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(alertVC, sender: nil)
+        
+        //        let refreshAlert = UIAlertController(title: "Refresh", message: "All data will be lost.", preferredStyle: UIAlertController.Style.alert)
+        //
+        //        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+        //            print("Handle Ok logic here")
+        //        }))
+        //
+        //        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+        //            print("Handle Cancel Logic here")
+        //        }))
+        //
+        //        present(refreshAlert, animated: true, completion: nil)
+            }
 }

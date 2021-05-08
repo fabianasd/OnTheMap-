@@ -26,17 +26,45 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginTapped(_ sender: UIButton) {
         print("aqi login")
+        setLoggingIn(true)
         OTMUser.login(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: self.handleLoginResponse(success:error:))
     }
     
     func handleLoginResponse(success: Bool, error: Error?) {
         print("handleLoginResponse")
-        OTMUser.createSessionId(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleSessionResponse(success:error:))
+        if success {
+            OTMUser.createSessionId(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleSessionResponse(success:error:))
+        } else {
+            showLoginFailure(message: error?.localizedDescription ?? "")
+        }
     }
     
     func handleSessionResponse(success: Bool, error: Error?) {
         print("aqui handleSessionResponse")
-        self.performSegue(withIdentifier: "completeLogin", sender: nil)
+        setLoggingIn(false)
+        if success {
+            self.performSegue(withIdentifier: "completeLogin", sender: nil)
+        } else {
+            showLoginFailure(message: error?.localizedDescription ?? "")
+        }
+    }
+    
+    func setLoggingIn(_ loggingIn: Bool) {
+//        if loggingIn {
+//            activityIndicator.startAnimating()
+//        } else {
+//            activityIndicator.stopAnimating()
+//        }
+        emailTextField.isEnabled = !loggingIn //o botão fica desabilitado
+        passwordTextField.isEnabled = !loggingIn
+        loginButton.isEnabled = !loggingIn
+    //    loginViaWebsiteButton.isEnabled = !loggingIn
+    }
+    
+    func showLoginFailure(message: String) { //valida tentativa de login falha
+        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(alertVC, sender: nil)
     }
 }
 

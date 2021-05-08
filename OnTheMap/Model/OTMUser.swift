@@ -25,13 +25,15 @@ class OTMUser {
         case createSessionId
         case getStudentLocation
         case postStudentLocation
+        case putStudentLocation
         
         var stringValue: String {
             switch self {
-            case .login: return Enpoints.base + "/users/\(OTMUser.key)"
-            case .createSessionId: return Enpoints.base + "/session"
-            case .getStudentLocation: return Enpoints.base + "/StudentLocation?order=-updateAt"
+            case .login: return Enpoints.base + "/users/\(OTMUser.key)" //recuperar algumas informacoes antes de postar no Parse
+            case .createSessionId: return Enpoints.base + "/session" //autenticar sessao
+            case .getStudentLocation: return Enpoints.base + "/StudentLocation?order=-updateAt" //obter a localizacao de varios alunos ao mesmo tempo
             case .postStudentLocation: return Enpoints.base + "/StudentLocation"
+            case .putStudentLocation: return Enpoints.base + "/StudentLocation/\(OTMUser.Auth.id)" //criar um novo aluno
             }
         }
         var url: URL {
@@ -39,6 +41,75 @@ class OTMUser {
         }
     }
     
+    //@discardableResult silencia os avisos de retornos não utilizados
+    //    @discardableResult class func taskForGETRequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping(ResponseType?, Error?) -> Void) -> URLSessionTask {
+    //        let task = URLSession.shared.dataTask(with: url) { data, response, error  in
+    //            guard let data = data else {
+    //                //acontece se houver um erro com a solicitação
+    //                DispatchQueue.main.async {
+    //                    completion(nil, error)
+    //                }
+    //                return
+    //            }
+    //            let decoder = JSONDecoder()
+    //            do {
+    //                let responseObject = try decoder.decode(ResponseType.self, from: data)
+    //                DispatchQueue.main.async {
+    //                    //se a analise JSON for bem-sucedida ou...
+    //                    completion(responseObject, nil)
+    //                }
+    //            } catch {
+    //                do {
+    //                    let errorResponse = try decoder.decode(OTMResponse.self, from: data)
+    //                    DispatchQueue.main.async {
+    //                        completion(nil, errorResponse)
+    //                    }
+    //                } catch {
+    //                    //... falhar
+    //                    DispatchQueue.main.async {
+    //                        completion(nil, error)
+    //                    }
+    //                }
+    //            }
+    //        }
+    //        task.resume()
+    //        return task
+    //    }
+    //
+    //    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping(ResponseType?, Error?) -> Void) {
+    //        var request = URLRequest(url: url)
+    //        request.httpMethod = "POST"
+    //        request.httpBody = try! JSONEncoder().encode(body)
+    //        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    //        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+    //            guard let data = data else {
+    //                //acontece se houver um erro com a solicitação
+    //                DispatchQueue.main.async {
+    //                    completion(nil, error)
+    //                }
+    //                return
+    //            }
+    //            let decoder = JSONDecoder()
+    //            do {
+    //                let responseObject = try decoder.decode(ResponseType.self, from: data)
+    //                DispatchQueue.main.async {//recarregamos os dados no thread principal usando assincrono.
+    //                    //se a analise JSON for bem-sucedida ou...
+    //                    completion(responseObject, nil)
+    //                }
+    //            } catch {
+    //                do {
+    //                    let errorResponse = try decoder.decode(OTMResponse.self, from: data)
+    //                    DispatchQueue.main.async {
+    //                        completion(nil, errorResponse)
+    //                    }
+    //                } catch {
+    //                    //... falhar
+    //                    completion(nil, error)
+    //                }
+    //            }
+    //        }
+    //        task.resume()
+    //    }
     //post
     class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         print("login")
@@ -85,8 +156,12 @@ class OTMUser {
             let range = 5..<data!.count //Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
             print(String(data: newData!, encoding: .utf8)!)
+            
+            let sessionResponse = try decoder.decode(SessionResponse.self, from: data!)
+            let isLoggined = data != nil && sessionResponse.status == 200 ? true : false
+            
             DispatchQueue.main.async {
-                completion((data != nil), error)
+                completion(isLoggined, error)
             }
         }
         task.resume()
@@ -94,7 +169,6 @@ class OTMUser {
     
     //get
     class func getStudentLocation(completion: @escaping ([Map], Bool, Error?) -> Void) {
-        print("studentLocation")
         var request = URLRequest(url: Enpoints.getStudentLocation.url)
         print(Enpoints.getStudentLocation.url)
         // let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
@@ -127,7 +201,7 @@ class OTMUser {
         task.resume()
     }
     
- //post
+    //post
     class func postStudentLocation(createdAt: String, firstName: String, lastName: String, latitude: Double, longitude: Double, mapString: String, mediaString: String?, mediaURL: String, objectId: String, uniqueKey: String, updatedAt: String, completion: @escaping (Bool, Error?) -> Void) {
         // var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
         var request = URLRequest(url: Enpoints.postStudentLocation.url)
