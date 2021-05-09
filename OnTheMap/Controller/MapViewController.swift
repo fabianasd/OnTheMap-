@@ -96,24 +96,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return []
     }
     
-    @IBAction func editingLocation(success: Bool, error: Error?) {
-        if success {
-            
-//            let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
-//            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//            show(alertVC, sender: nil)
-            
-            self.performSegue(withIdentifier: "Location", sender: nil)
-        } else { //valida email e senha
-            showLoginFailure(message: error?.localizedDescription ?? "")
-        }
-    }
+    @IBAction func editingLocation(_ sender: UIButton) {
+        func editing(getUserResponse: GetUserResponse?, error: Error?) {
+            if GetUserResponse.CodingKeys.lastName == nil {
+                   self.performSegue(withIdentifier: "Location", sender: nil)
+               } else { //valida email e senha
+                   showEditingFailure(message: error?.localizedDescription ?? "")
+               }
+           }    }
+        
     
-    
-    func showLoginFailure(message: String) {
-        print("aqui no editingLocation ")
-        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+    func showEditingFailure(message: String) {
+        print("aqui no showEditingFailure ")
+        let alertVC = UIAlertController(title: "User Cadastred", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         show(alertVC, sender: nil)
         
         //        let refreshAlert = UIAlertController(title: "Refresh", message: "All data will be lost.", preferredStyle: UIAlertController.Style.alert)

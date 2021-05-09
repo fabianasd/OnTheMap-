@@ -31,24 +31,14 @@ class LoginViewController: UIViewController {
     
     func handleGetUserResponse(getUserResponse: GetUserResponse?, error: Error?) {
         print("handleLoginResponse")
-        //        if getUserResponse != nil {
-        //
-        //        } else {
-        //            showLoginFailure(message: (getUserResponse?.error ?? error?.localizedDescription) ?? "")
-        //        }
-        
-        if getUserResponse != nil  {
-            OTMUser.getUser(completion: handleGetUserResponse(getUserResponse:error:))
-        } else {//valida email e senha
-            showLoginFailure(message: (getUserResponse?.error ?? error?.localizedDescription) ?? "")             }
     }
     
     func handleSessionResponse(sessionResponse: SessionResponse?, error: Error?) {
         setLoggingIn(false)
-        if sessionResponse != nil {
+        if sessionResponse?.error == nil && sessionResponse != nil {
             UserModel.session = sessionResponse!
             OTMUser.key = (sessionResponse?.account?.key!)!
-           // OTMUser.getUser(completion: handleGetUserResponse(getUserResponse:error:))
+//            OTMUser.getUser(completion: handleGetUserResponse(getUserResponse:error:))
             self.performSegue(withIdentifier: "completeLogin", sender: nil)
             
         } else {
@@ -56,14 +46,12 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
-    
     func setLoggingIn(_ loggingIn: Bool) {
-        //        if loggingIn {
-        //            activityIndicator.startAnimating()
-        //        } else {
-        //            activityIndicator.stopAnimating()
-        //        }
+        if loggingIn {
+            lodingActivity.startAnimating()
+        } else {
+            lodingActivity.stopAnimating()
+        }
         emailTextField.isEnabled = !loggingIn //o botão fica desabilitado
         passwordTextField.isEnabled = !loggingIn
         loginButton.isEnabled = !loggingIn
