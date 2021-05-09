@@ -215,7 +215,7 @@
                     <navigationItem key="navigationItem" title="On The Map" id="XlS-k7-boa">
                         <barButtonItem key="leftBarButtonItem" title="Pin" image="icon_pin" width="4" id="Zvb-yy-cib">
                             <connections>
-                                <action selector="editingLocationWithSuccess:error:" destination="zd6-fh-MSS" id="6ii-QJ-nS1"/>
+                                <action selector="editingLocation" destination="zd6-fh-MSS" id="qh3-ZH-Yw7"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Refresh" image="icon_refresh" id="Wl1-KB-iee"/>
