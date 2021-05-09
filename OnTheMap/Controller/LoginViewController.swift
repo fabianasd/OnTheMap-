@@ -25,40 +25,49 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginTapped(_ sender: UIButton) {
-        print("aqi login")
         setLoggingIn(true)
-        OTMUser.login(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: self.handleLoginResponse(success:error:))
+        OTMUser.createSessionId(username: self.emailTextField.text ?? "", password: self.passwordTextField.text! ?? "", completion: handleSessionResponse(sessionResponse:error:))
     }
     
-    func handleLoginResponse(success: Bool, error: Error?) {
+    func handleGetUserResponse(getUserResponse: GetUserResponse?, error: Error?) {
         print("handleLoginResponse")
-        if success {
-            OTMUser.createSessionId(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleSessionResponse(success:error:))
+        //        if getUserResponse != nil {
+        //
+        //        } else {
+        //            showLoginFailure(message: (getUserResponse?.error ?? error?.localizedDescription) ?? "")
+        //        }
+        
+        if getUserResponse != nil  {
+            OTMUser.getUser(completion: handleGetUserResponse(getUserResponse:error:))
+        } else {//valida email e senha
+            showLoginFailure(message: (getUserResponse?.error ?? error?.localizedDescription) ?? "")             }
+    }
+    
+    func handleSessionResponse(sessionResponse: SessionResponse?, error: Error?) {
+        setLoggingIn(false)
+        if sessionResponse != nil {
+            UserModel.session = sessionResponse!
+            OTMUser.key = (sessionResponse?.account?.key!)!
+           // OTMUser.getUser(completion: handleGetUserResponse(getUserResponse:error:))
+            self.performSegue(withIdentifier: "completeLogin", sender: nil)
+            
         } else {
-            showLoginFailure(message: error?.localizedDescription ?? "")
+            showLoginFailure(message: (sessionResponse?.error ?? error?.localizedDescription) ?? "")
         }
     }
     
-    func handleSessionResponse(success: Bool, error: Error?) {
-        print("aqui handleSessionResponse")
-        setLoggingIn(false)
-        if success {
-            self.performSegue(withIdentifier: "completeLogin", sender: nil)
-        } else {
-            showLoginFailure(message: error?.localizedDescription ?? "")
-        }
-    }
+    
     
     func setLoggingIn(_ loggingIn: Bool) {
-//        if loggingIn {
-//            activityIndicator.startAnimating()
-//        } else {
-//            activityIndicator.stopAnimating()
-//        }
+        //        if loggingIn {
+        //            activityIndicator.startAnimating()
+        //        } else {
+        //            activityIndicator.stopAnimating()
+        //        }
         emailTextField.isEnabled = !loggingIn //o botão fica desabilitado
         passwordTextField.isEnabled = !loggingIn
         loginButton.isEnabled = !loggingIn
-    //    loginViaWebsiteButton.isEnabled = !loggingIn
+        //    loginViaWebsiteButton.isEnabled = !loggingIn
     }
     
     func showLoginFailure(message: String) { //valida tentativa de login falha

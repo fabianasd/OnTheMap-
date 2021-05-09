@@ -8,12 +8,32 @@
 
 import Foundation
 
+struct SessionResponseAccount: Codable {
+    let registered: Bool?
+    let key: String?
+}
+
+struct SessionResponseSession: Codable {
+    let id: String?
+    let expiration: String?
+}
+
 struct SessionResponse: Codable {
-    let success: Bool
-    let sessionId: String
+    let status: Int?
+    let error: String?
+    let account: SessionResponseAccount?
+    let session: SessionResponseSession?
     
     enum CodingKeys: String, CodingKey {
-        case success
-        case sessionId = "session_id"
+        case status = "status"
+        case error = "error"
+        case account = "account"
+        case session = "session"
+    }
+}
+
+extension SessionResponse: LocalizedError {
+    var errorDescription: String? {
+        return error
     }
 }

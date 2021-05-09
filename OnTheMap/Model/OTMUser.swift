@@ -11,7 +11,7 @@ import UIKit
 
 class OTMUser {
     
-    static let key = ""
+    static var key = ""
     
     struct Auth {
         static var account = 0
@@ -21,7 +21,7 @@ class OTMUser {
     enum Enpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
         
-        case login
+        case getUser
         case createSessionId
         case getStudentLocation
         case postStudentLocation
@@ -29,7 +29,7 @@ class OTMUser {
         
         var stringValue: String {
             switch self {
-            case .login: return Enpoints.base + "/users/\(OTMUser.key)" //recuperar algumas informacoes antes de postar no Parse
+            case .getUser: return Enpoints.base + "/users/\(OTMUser.key)" //recuperar algumas informacoes antes de postar no Parse
             case .createSessionId: return Enpoints.base + "/session" //autenticar sessao
             case .getStudentLocation: return Enpoints.base + "/StudentLocation?order=-updateAt" //obter a localizacao de varios alunos ao mesmo tempo
             case .postStudentLocation: return Enpoints.base + "/StudentLocation"
@@ -111,27 +111,42 @@ class OTMUser {
     //        task.resume()
     //    }
     //post
-    class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
-        print("login")
-        let request = URLRequest(url: Enpoints.login.url)
-        print(Enpoints.login.url)
+    class func getUser(completion: @escaping (GetUserResponse?, Error?) -> Void) {
+        let request = URLRequest(url: Enpoints.getUser.url)
+        print(Enpoints.getUser.url)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
-            if error != nil { // Handle error...
-                completion(false, error)
+            if error != nil {
+                completion(nil, error)
             }
-            let range = 5..<data!.count //Range(5..<data!.count)
-            let newData = data?.subdata(in: range) /* subset response data! */
-            print(String(data: newData!, encoding: .utf8)!)
-            completion(true, nil)
+            let range = 5..<data!.count
+            let newData = data?.subdata(in: range)
+            print(String(data: data!, encoding: .utf8)!)
+            do {
+                let range = 5..<data!.count
+                let newData = data?.subdata(in: range)
+                
+                let decoder = JSONDecoder()
+                let getUserResponse = try decoder.decode(GetUserResponse.self, from: newData!)
+                UserModel.user = getUserResponse
+                DispatchQueue.main.async {
+                    completion(getUserResponse, error)
+                }
+            }
+            catch {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+            }
+            completion(nil, error)
         }
         task.resume()
     }
     
     //post
-    class func createSessionId(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
+    class func createSessionId(username: String, password: String, completion: @escaping (SessionResponse?, Error?) -> Void) {
         var request = URLRequest(url: Enpoints.createSessionId.url)
-        //  var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
+        
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -145,23 +160,28 @@ class OTMUser {
                 "}" +
                 "}").data(using: .utf8)
         
-        //request.httpBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: .utf8)
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if error != nil { // Handle error…
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            
+            if error != nil {
                 DispatchQueue.main.async {
-                    completion(false, error)
+                    completion(nil, error)
                 }
             }
-            let range = 5..<data!.count //Range(5..<data!.count)
-            let newData = data?.subdata(in: range) /* subset response data! */
-            print(String(data: newData!, encoding: .utf8)!)
             
-            let sessionResponse = try decoder.decode(SessionResponse.self, from: data!)
-            let isLoggined = data != nil && sessionResponse.status == 200 ? true : false
-            
-            DispatchQueue.main.async {
-                completion(isLoggined, error)
+            do {
+                let range = 5..<data!.count
+                let newData = data?.subdata(in: range)
+                
+                let decoder = JSONDecoder()
+                let sessionResponse = try decoder.decode(SessionResponse.self, from: newData!)
+                DispatchQueue.main.async {
+                    completion(sessionResponse, error)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
             }
         }
         task.resume()

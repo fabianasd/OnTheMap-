@@ -11,7 +11,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+ var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -32,6 +32,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    //verificar se a URL esta correta
+       func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+           let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+           
+           if components?.scheme == "onthemap" && components?.path == "authenticate" {
+               let loginVC = window?.rootViewController as! LoginViewController
+            OTMUser.createSessionId(username:"", password: "", completion: loginVC.handleSessionResponse(sessionResponse:error:))
+           }
+           return true
+       }
 }
 
