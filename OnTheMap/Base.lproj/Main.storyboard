@@ -245,6 +245,9 @@
                                     <navigationItem id="BaF-oD-Fmb">
                                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="cancel" id="0kX-zf-h80">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="cancel:" destination="nl5-J1-4XH" id="W4k-AN-zcr"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -286,6 +289,9 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="locationTextField:" destination="nl5-J1-4XH" eventType="editingDidBegin" id="tqI-pO-Ihk"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.67416387799999999" green="0.92628818749999997" blue="0.93182915450000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -297,8 +303,8 @@
                                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="0er-r1-vJh">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="170.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YAM-yT-7t2">
-                                                        <rect key="frame" x="97" y="8" width="180" height="50"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YAM-yT-7t2">
+                                                        <rect key="frame" x="97" y="8" width="181" height="50"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="E6n-mD-3W3"/>
@@ -306,7 +312,7 @@
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                         <state key="normal" title="Find on the Map"/>
                                                         <connections>
-                                                            <segue destination="hfi-uh-fxX" kind="presentation" id="W2X-mf-6A8"/>
+                                                            <action selector="findMap:" destination="nl5-J1-4XH" eventType="touchUpInside" id="S9s-De-fJW"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -316,7 +322,7 @@
                                                     <constraint firstItem="YAM-yT-7t2" firstAttribute="top" secondItem="0er-r1-vJh" secondAttribute="top" constant="8" id="hXC-Eb-Tuy"/>
                                                     <constraint firstItem="YAM-yT-7t2" firstAttribute="leading" secondItem="0er-r1-vJh" secondAttribute="leading" constant="97" id="meX-1J-gOz"/>
                                                     <constraint firstItem="YAM-yT-7t2" firstAttribute="top" secondItem="0er-r1-vJh" secondAttribute="topMargin" id="nB1-Ns-eMH"/>
-                                                    <constraint firstAttribute="bottom" secondItem="YAM-yT-7t2" secondAttribute="bottom" constant="104" id="ygo-hM-7GN"/>
+                                                    <constraint firstAttribute="bottom" secondItem="YAM-yT-7t2" secondAttribute="bottom" constant="112.5" id="ygo-hM-7GN"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -354,15 +360,21 @@
                         <barButtonItem key="rightBarButtonItem" title="Cancel" width="4" id="eaD-iM-h3B"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="cancel" destination="0kX-zf-h80" id="2BM-SM-9iR"/>
+                        <outlet property="findMap" destination="YAM-yT-7t2" id="Wou-w7-pjs"/>
+                        <outlet property="locationTextField" destination="YPA-g6-stc" id="Zig-QQ-ikz"/>
+                        <segue destination="hfi-uh-fxX" kind="presentation" identifier="search" id="s66-5f-OHv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAZ-ZV-Q1H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1674" y="-313"/>
         </scene>
-        <!--View Controller-->
+        <!--Search Location Controller-->
         <scene sceneID="ncl-oT-bZI">
             <objects>
-                <viewController id="hfi-uh-fxX" sceneMemberID="viewController">
+                <viewController id="hfi-uh-fxX" customClass="SearchLocationController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O5x-Z0-CVT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -374,6 +386,9 @@
                                     <navigationItem id="MVI-vB-wpL">
                                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="cancel" id="i1a-rT-aaz">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="cancel:" destination="hfi-uh-fxX" id="Ivy-6b-gbS"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -403,6 +418,9 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submit:" destination="hfi-uh-fxX" eventType="touchUpInside" id="cpu-tP-2OL"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.68575090169999997" blue="0.94794362779999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -429,6 +447,11 @@
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="cancel" destination="i1a-rT-aaz" id="bJP-po-hTe"/>
+                        <outlet property="linkLinkedin" destination="H86-wX-T1d" id="fCG-rN-qXd"/>
+                        <outlet property="submit" destination="yt3-fC-zx2" id="zZ7-Wh-WGA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cL6-EK-Fcu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

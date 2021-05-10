@@ -20,6 +20,7 @@
 		0C6871F3263F5D40006C5D6D /* EditingLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6871F2263F5D40006C5D6D /* EditingLocation.swift */; };
 		0C6E34DE2642285B000FE020 /* SessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6E34DD2642285B000FE020 /* SessionResponse.swift */; };
 		0C6E34E02642294D000FE020 /* OTMResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6E34DF2642294D000FE020 /* OTMResponse.swift */; };
+		0C77287C2648B6F3000D997B /* SearchLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C77287B2648B6F3000D997B /* SearchLocationController.swift */; };
 		0C7FCAD226374F2200DF3D5C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7FCAD126374F2200DF3D5C /* LoginViewController.swift */; };
 		0CB349C526476B9F00527128 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB349C426476B9F00527128 /* UserModel.swift */; };
 		0CB349C726476BC400527128 /* GetUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB349C626476BC400527128 /* GetUserResponse.swift */; };
@@ -43,6 +44,7 @@
 		0C6871F2263F5D40006C5D6D /* EditingLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingLocation.swift; sourceTree = "<group>"; };
 		0C6E34DD2642285B000FE020 /* SessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResponse.swift; sourceTree = "<group>"; };
 		0C6E34DF2642294D000FE020 /* OTMResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMResponse.swift; sourceTree = "<group>"; };
+		0C77287B2648B6F3000D997B /* SearchLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationController.swift; sourceTree = "<group>"; };
 		0C7FCAD126374F2200DF3D5C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0CB349C426476B9F00527128 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		0CB349C626476BC400527128 /* GetUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserResponse.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				0CCDA9D02637990100F25E2F /* MapViewController.swift */,
 				0CCDA9D226379AD900F25E2F /* MapViewControllerList.swift */,
 				0C6871F2263F5D40006C5D6D /* EditingLocation.swift */,
+				0C77287B2648B6F3000D997B /* SearchLocationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				0CB349C726476BC400527128 /* GetUserResponse.swift in Sources */,
 				0CCDA9D326379AD900F25E2F /* MapViewControllerList.swift in Sources */,
 				0C6871F3263F5D40006C5D6D /* EditingLocation.swift in Sources */,
+				0C77287C2648B6F3000D997B /* SearchLocationController.swift in Sources */,
 				0C3D8D76263641DC00F1CC59 /* SceneDelegate.swift in Sources */,
 				0C33F3AE263A364A0086FA15 /* OTMUser.swift in Sources */,
 				0C6E34DE2642285B000FE020 /* SessionResponse.swift in Sources */,

@@ -112,6 +112,13 @@ class OTMUser {
     //    }
     //post
     class func getUser(completion: @escaping (GetUserResponse?, Error?) -> Void) {
+        
+        // Mock
+        DispatchQueue.main.async {
+            completion(GetUserResponse(status: nil, error: nil, lastName: "Petrovick", mailingAddress: "petrovickg@hotmail.com"), nil)
+        }
+        /*
+        //Official implementation
         let request = URLRequest(url: Enpoints.getUser.url)
         print(Enpoints.getUser.url)
         let session = URLSession.shared
@@ -141,10 +148,17 @@ class OTMUser {
             completion(nil, error)
         }
         task.resume()
+        */
     }
     
     //post
     class func createSessionId(username: String, password: String, completion: @escaping (SessionResponse?, Error?) -> Void) {
+        // Mock
+        DispatchQueue.main.async {
+            completion(SessionResponse(status: nil, error: nil, account: SessionResponseAccount(registered: true, key: "1234567890"), session: SessionResponseSession(id: "OutroId", expiration: "2021-05-09T12:49:00Z")), nil)
+        }
+        /*
+        //Official implementation
         var request = URLRequest(url: Enpoints.createSessionId.url)
         
         request.httpMethod = "POST"
@@ -185,10 +199,16 @@ class OTMUser {
             }
         }
         task.resume()
+        */
     }
     
     //get
     class func getStudentLocation(completion: @escaping ([Map], Bool, Error?) -> Void) {
+        DispatchQueue.main.async {
+            completion([], false, nil)
+        }
+        /*
+        //Official implementation
         var request = URLRequest(url: Enpoints.getStudentLocation.url)
         print(Enpoints.getStudentLocation.url)
         // let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
@@ -219,6 +239,7 @@ class OTMUser {
             
         }
         task.resume()
+        */
     }
     
     //post

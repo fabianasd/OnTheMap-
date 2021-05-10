@@ -68,5 +68,53 @@
             landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "99754B7E-0A84-4C24-AFDE-4F92E2257DD4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OnTheMap/Controller/EditingLocation.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "cancel(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "99754B7E-0A84-4C24-AFDE-4F92E2257DD4 - a7974ee22e13bdd2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OnTheMap.EditingLocation.cancel(Any) -&gt; ()"
+                  moduleName = "OnTheMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gabrielpetrovick/Projetos/Faby/Udacity/OnTheMap/OnTheMap/Controller/EditingLocation.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "158">
+               </Location>
+               <Location
+                  uuid = "99754B7E-0A84-4C24-AFDE-4F92E2257DD4 - 2fea572fed9489ba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in OnTheMap.EditingLocation.cancel(Any) -&gt; ()"
+                  moduleName = "OnTheMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gabrielpetrovick/Projetos/Faby/Udacity/OnTheMap/OnTheMap/Controller/EditingLocation.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
