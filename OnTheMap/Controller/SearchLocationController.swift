@@ -32,6 +32,9 @@ class SearchLocationController: UIViewController {
     @IBAction func submit(_ sender: Any) {
         //deve salvar no MapModel o link do linkedin, juntamente com a localizacao e nome do usuario
         //retornar as informacoes no mapViewControllerList
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func cancel(_ sender: Any) {

@@ -36,10 +36,15 @@ class EditingLocation: UIViewController {
     
     @IBAction func findMap(_ sender: UIButton) {
         // salvar a localizacao informada no locationTextField para pesquisar na  tela SearchLocation
-        self.performSegue(withIdentifier: "search", sender: nil)
+        print("findMap")
+        OTMUser.postStudentLocation() { studentResponse, error in
+            //    MapModel.maplist = GetUserResponse
+            self.performSegue(withIdentifier: "search", sender: nil)
+        }
     }
     
     @IBAction func cancel(_ sender: Any) {
+        print("cancel")
         DispatchQueue.main.async {
             self.dismiss(animated: true, completion: nil)
         }

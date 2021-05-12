@@ -26,7 +26,10 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginTapped(_ sender: UIButton) {
         setLoggingIn(true)
-        OTMUser.createSessionId(username: self.emailTextField.text ?? "", password: self.passwordTextField.text! ?? "", completion: handleSessionResponse(sessionResponse:error:))
+        OTMUser.createSessionId(
+            username: self.emailTextField.text ?? "",
+            password: self.passwordTextField.text! ?? "",
+            completion: handleSessionResponse(sessionResponse:error:))
     }
     
     func handleGetUserResponse(getUserResponse: GetUserResponse?, error: Error?) {

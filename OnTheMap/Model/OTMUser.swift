@@ -26,14 +26,16 @@ class OTMUser {
         case getStudentLocation
         case postStudentLocation
         case putStudentLocation
+        case deleteSession
         
         var stringValue: String {
             switch self {
             case .getUser: return Enpoints.base + "/users/\(OTMUser.key)" //recuperar algumas informacoes antes de postar no Parse
             case .createSessionId: return Enpoints.base + "/session" //autenticar sessao
             case .getStudentLocation: return Enpoints.base + "/StudentLocation?order=-updateAt" //obter a localizacao de varios alunos ao mesmo tempo
-            case .postStudentLocation: return Enpoints.base + "/StudentLocation"
-            case .putStudentLocation: return Enpoints.base + "/StudentLocation/\(OTMUser.Auth.id)" //criar um novo aluno
+            case .postStudentLocation: return Enpoints.base + "/StudentLocation" //criar um novo local de aluno
+            case .putStudentLocation: return Enpoints.base + "/StudentLocation/\(OTMUser.Auth.id)" //atualizar a localização de um aluno existente
+            case .deleteSession: return Enpoints.base + "/session" //logout
             }
         }
         var url: URL {
@@ -110,15 +112,8 @@ class OTMUser {
     //        }
     //        task.resume()
     //    }
-    //post
+    //post - 11
     class func getUser(completion: @escaping (GetUserResponse?, Error?) -> Void) {
-        
-        // Mock
-        DispatchQueue.main.async {
-            completion(GetUserResponse(status: nil, error: nil, lastName: "Petrovick", mailingAddress: "petrovickg@hotmail.com"), nil)
-        }
-        /*
-        //Official implementation
         let request = URLRequest(url: Enpoints.getUser.url)
         print(Enpoints.getUser.url)
         let session = URLSession.shared
@@ -148,17 +143,10 @@ class OTMUser {
             completion(nil, error)
         }
         task.resume()
-        */
     }
     
-    //post
+    //post - 9
     class func createSessionId(username: String, password: String, completion: @escaping (SessionResponse?, Error?) -> Void) {
-        // Mock
-        DispatchQueue.main.async {
-            completion(SessionResponse(status: nil, error: nil, account: SessionResponseAccount(registered: true, key: "1234567890"), session: SessionResponseSession(id: "OutroId", expiration: "2021-05-09T12:49:00Z")), nil)
-        }
-        /*
-        //Official implementation
         var request = URLRequest(url: Enpoints.createSessionId.url)
         
         request.httpMethod = "POST"
@@ -190,7 +178,7 @@ class OTMUser {
                 let decoder = JSONDecoder()
                 let sessionResponse = try decoder.decode(SessionResponse.self, from: newData!)
                 DispatchQueue.main.async {
-                    completion(sessionResponse, error)
+                    completion(sessionResponse, nil)
                 }
             } catch {
                 DispatchQueue.main.async {
@@ -199,16 +187,10 @@ class OTMUser {
             }
         }
         task.resume()
-        */
     }
     
-    //get
+    //get - 5
     class func getStudentLocation(completion: @escaping ([Map], Bool, Error?) -> Void) {
-        DispatchQueue.main.async {
-            completion([], false, nil)
-        }
-        /*
-        //Official implementation
         var request = URLRequest(url: Enpoints.getStudentLocation.url)
         print(Enpoints.getStudentLocation.url)
         // let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
@@ -239,26 +221,62 @@ class OTMUser {
             
         }
         task.resume()
-        */
     }
     
-    //post
-    class func postStudentLocation(createdAt: String, firstName: String, lastName: String, latitude: Double, longitude: Double, mapString: String, mediaString: String?, mediaURL: String, objectId: String, uniqueKey: String, updatedAt: String, completion: @escaping (Bool, Error?) -> Void) {
-        // var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
+    //post - 6
+    class func postStudentLocation(completion: @escaping (StudentResponse?, Error?) -> Void) {
         var request = URLRequest(url: Enpoints.postStudentLocation.url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".data(using: .utf8)
+        request.httpBody =
+            ("{" +
+                "\"uniqueKey\": \"1234\"," +
+                "\"firstName\": \"AAAAAAFernanda\"," +
+                "\"lastName\": \"Brasil\"," +
+                "\"mapString\": \"Rio de Janeiro, RJ\"," +
+                "\"mediaURL\": \"https://udacity.com\"," +
+                "\"latitude\": -22.96466749110056," +
+                "\"longitude\": -43.17709978734727" +
+                "}").data(using: .utf8)
+        
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…
                 DispatchQueue.main.async {
-                    completion(false, error)
+                    completion(nil, error)
                 }
             }
             print(String(data: data!, encoding: .utf8)!)
+            do {
+                let range = 5..<data!.count
+                let newData = data?.subdata(in: range)
+                print(String(data: newData!, encoding: .utf8)!)
+                
+                let decoder = JSONDecoder()
+                let studentResponse = try decoder.decode(StudentResponse.self, from: data!)
+                DispatchQueue.main.async {
+                    completion(studentResponse, nil)
+                }
+            }
+            catch {
+                print(error)
+                //... falhar
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+            }
         }
         task.resume()
+    }
+    
+    //put - 7
+    class func putStudentLocation(completion: @escaping (Bool, Error?) -> Void) {
+        //code
+    }
+    
+    //delete - 10
+    class func Logout(completion: @escaping (Bool, Error?) -> Void) {
+        //code
     }
 }
 
