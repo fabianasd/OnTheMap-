@@ -453,6 +453,7 @@
                     <connections>
                         <outlet property="cancel" destination="i1a-rT-aaz" id="bJP-po-hTe"/>
                         <outlet property="linkLinkedin" destination="H86-wX-T1d" id="fCG-rN-qXd"/>
+                        <outlet property="mapView" destination="9ls-O9-JUH" id="75w-Bc-o7s"/>
                         <outlet property="submit" destination="yt3-fC-zx2" id="zZ7-Wh-WGA"/>
                     </connections>
                 </viewController>

@@ -7,8 +7,10 @@
 //
 //
 import UIKit
+import MapKit
+import CoreLocation
 
-class EditingLocation: UIViewController {
+class EditingLocation: UIViewController, CLLocationManagerDelegate {
     
     /*
      
@@ -24,29 +26,74 @@ class EditingLocation: UIViewController {
     @IBOutlet weak var cancel: UIBarButtonItem!
     @IBOutlet weak var findMap: UIButton!
     
+    var locationManager:CLLocationManager!
+    var userLocation:CLLocation!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         locationTextField.text = "Enter Your Location Here"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        determineMyCurrentLocation()
+    }
+    
+    func determineMyCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+            //locationManager.startUpdatingHeading()
+        }
     }
     
     @IBAction func locationTextField(_ sender: UITextField) {
         sender.text = ""
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        userLocation = locations[0] as CLLocation
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        //EMITIR UM UIALERT AQUI!!!!!
+        print("Error \(error)")
+    }
     
     @IBAction func findMap(_ sender: UIButton) {
         // salvar a localizacao informada no locationTextField para pesquisar na  tela SearchLocation
         print("findMap")
-        OTMUser.postStudentLocation() { studentResponse, error in
-            //    MapModel.maplist = GetUserResponse
-            self.performSegue(withIdentifier: "search", sender: nil)
-        }
+        self.performSegue(withIdentifier: "search", sender: nil)
+        
+        //        OTMUser.postStudentLocation() { studentResponse, error in
+        //            //    MapModel.maplist = GetUserResponse
+        //            self.performSegue(withIdentifier: "search", sender: nil)
+        //        }
     }
+    
+    //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    //        print("Aqui!")
+    //        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+    //        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    //    }
     
     @IBAction func cancel(_ sender: Any) {
         print("cancel")
         DispatchQueue.main.async {
             self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "search" {
+            if let destinationVC = segue.destination as? SearchLocationController {
+                //   print(userLocation.coordinate.latitude)
+                destinationVC.editingMap = Map(createdAt: "name", firstName: "names", lastName: "aaaa", latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude, mapString: "dfsdf", mediaString: "sss", mediaURL: "ddd", objectId: "ddd", uniqueKey: "sdfsdf", updatedAt: "sdfsdf")
+            }
         }
     }
     
