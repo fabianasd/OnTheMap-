@@ -140,12 +140,23 @@
                         <viewLayoutGuide key="safeArea" id="jBB-jD-A3G"/>
                     </view>
                     <navigationItem key="navigationItem" title="On The Map" id="O7x-tE-rUY">
-                        <barButtonItem key="leftBarButtonItem" title="Pin" image="icon_pin" width="4" id="SF2-9a-Txd"/>
-                        <barButtonItem key="rightBarButtonItem" title="Refresh" image="icon_refresh" id="nXp-ub-Kvz"/>
+                        <barButtonItem key="leftBarButtonItem" title="Pin" image="icon_pin" width="4" id="SF2-9a-Txd">
+                            <connections>
+                                <action selector="editingLocation" destination="a3T-yr-njH" id="MGe-4R-OVm"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" image="icon_refresh" id="nXp-ub-Kvz">
+                            <connections>
+                                <action selector="refreshMap:" destination="a3T-yr-njH" id="iFF-25-PXc"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="pin" destination="SF2-9a-Txd" id="FHp-NU-Aat"/>
+                        <outlet property="refresh" destination="nXp-ub-Kvz" id="wVu-xO-bAN"/>
                         <outlet property="tableView" destination="fnd-kR-sXD" id="foW-vC-nqa"/>
+                        <segue destination="nl5-J1-4XH" kind="presentation" identifier="Location" id="kR5-Eo-4c7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pXy-QP-h7W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -218,11 +229,17 @@
                                 <action selector="editingLocation" destination="zd6-fh-MSS" id="qh3-ZH-Yw7"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Refresh" image="icon_refresh" id="Wl1-KB-iee"/>
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" image="icon_refresh" id="Wl1-KB-iee">
+                            <connections>
+                                <action selector="refreshMap:" destination="zd6-fh-MSS" id="9l3-5s-dry"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="cQD-Ut-hzl" id="en4-2r-tIa"/>
+                        <outlet property="pin" destination="Zvb-yy-cib" id="kd7-19-VC4"/>
+                        <outlet property="refresh" destination="Wl1-KB-iee" id="urx-WS-DcV"/>
                         <segue destination="nl5-J1-4XH" kind="presentation" identifier="Location" id="Xz9-UE-0bI"/>
                     </connections>
                 </viewController>
@@ -480,6 +497,9 @@
             <point key="canvasLocation" x="-3972" y="86"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="kR5-Eo-4c7"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="facebook 20.53.08-2" width="24" height="24"/>
         <image name="icon_listview-deselected" width="75" height="50"/>

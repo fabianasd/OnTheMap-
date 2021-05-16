@@ -16,7 +16,7 @@ struct Map: Codable, Equatable {
     let longitude: Double
     let mapString: String
     let mediaString: String?
-    let mediaURL: String
+    var mediaURL: String
     let objectId: String
     let uniqueKey: String
     let updatedAt: String

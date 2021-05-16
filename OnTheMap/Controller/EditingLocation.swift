@@ -61,7 +61,7 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
         //EMITIR UM UIALERT AQUI!!!!!
-        print("Error \(error)")
+        print("Error aquiiii \(error)")
     }
     
     @IBAction func findMap(_ sender: UIButton) {
@@ -90,9 +90,27 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "search" {
-            if let destinationVC = segue.destination as? SearchLocationController {
-                //   print(userLocation.coordinate.latitude)
-                destinationVC.editingMap = Map(createdAt: "name", firstName: "names", lastName: "aaaa", latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude, mapString: "dfsdf", mediaString: "sss", mediaURL: "ddd", objectId: "ddd", uniqueKey: "sdfsdf", updatedAt: "sdfsdf")
+            if(userLocation != nil)
+            {
+                if let destinationVC = segue.destination as? SearchLocationController {
+                print(userLocation.coordinate.latitude)
+                
+                destinationVC.editingMap =
+                    Map(createdAt: "",
+                        firstName: "",
+                        lastName: "",
+                        latitude:  userLocation.coordinate.latitude,
+                        longitude: userLocation.coordinate.longitude,
+                        mapString: "",
+                        mediaString: "",
+                        mediaURL: "",
+                        objectId: "",
+                        uniqueKey: "",
+                        updatedAt: "")
+                }
+            }
+            if(userLocation == nil){
+                print("erro aquiiiiii")
             }
         }
     }

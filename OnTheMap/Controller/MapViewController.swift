@@ -11,6 +11,8 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var pin: UIBarButtonItem!
+    @IBOutlet weak var refresh: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,47 +99,30 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func editingLocation() {
-
-    let alert = UIAlertController(title: "UIAlertController", message: "Would you like to continue learning how to use iOS alerts?", preferredStyle: UIAlertController.Style.alert)
-
+        
+        let alert = UIAlertController(title: "UIAlertController", message: "Would you like to continue learning how to use iOS alerts?", preferredStyle: UIAlertController.Style.alert)
+        
         alert.addAction((UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
             self.performSegue(withIdentifier: "Location", sender: nil)
         })))
-    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-
-    self.present(alert, animated: true, completion: nil)
-    }
-//
-//    func editing(getUserResponse: GetUserResponse?, error: Error?) {
-//        if GetUserResponse.CodingKeys.lastName != nil {
-//                self.performSegue(withIdentifier: "Location", sender: nil)
-////               } else { //valida email e senha
-////                   showEditingFailure(message: error?.localizedDescription ?? "")
-////               }
-//           }
-    }
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         
+        self.present(alert, animated: true, completion: nil)
+    }
+    //
+    //    func editing(getUserResponse: GetUserResponse?, error: Error?) {
+    //        if GetUserResponse.CodingKeys.lastName != nil {
+    //                self.performSegue(withIdentifier: "Location", sender: nil)
+    ////               } else { //valida email e senha
+    ////                   showEditingFailure(message: error?.localizedDescription ?? "")
+    ////               }
+    //           }
     
-//    func showEditingFailure(message: String) {
-//        print("aqui no showEditingFailure ")
-//        let alertVC = UIAlertController(title: "User Cadastred", message: message, preferredStyle: .alert)
-//        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//       // show(alertVC, sender: nil)
-//      //  present(alertVC, animated: true, completion: nil)
-//
- //   @IBAction func showAlertButtonTapped(_ sender: UIButton) {
+    @IBAction func refreshMap(_ sender: Any) {
+        print("reload aqui")
+            self.mapView.reloadInputViews()
+    }
+    
+}
 
-        // create the alert
-//        let alert = UIAlertController(title: "UIAlertController", message: "Would you like to continue learning how to use iOS alerts?", preferredStyle: UIAlertController.Style.alert)
-//
-//        // add the actions (buttons)
-//        alert.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: nil))
-//        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-//
-//        // show the alert
-//        self.present(alert, animated: true, completion: nil)
-//    // }
-//}
 
-//}

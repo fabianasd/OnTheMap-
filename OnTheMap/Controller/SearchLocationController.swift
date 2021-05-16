@@ -34,12 +34,15 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
         sender.text = ""
     }
     
-    
     @IBAction func submit(_ sender: Any) {
-        //deve salvar no MapModel o link do linkedin, juntamente com a localizacao e nome do usuario
-        //retornar as informacoes no mapViewControllerList
+        if(linkLinkedin != nil)
+        {
+            editingMap.mediaURL = linkLinkedin.text!
+            MapModel.maplist.append(editingMap)
+        }
         DispatchQueue.main.async {
-            self.dismiss(animated: true, completion: nil)
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+          //   self.performSegue(withIdentifier: "submit", sender: nil)
         }
     }
     
@@ -86,8 +89,8 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-//        annotation.title = "\(first) \(last)"
-//        annotation.subtitle = mediaURL
+        //        annotation.title = "\(first) \(last)"
+        //        annotation.subtitle = mediaURL
         
         self.mapView.addAnnotation(annotation)
     }
