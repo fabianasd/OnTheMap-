@@ -13,6 +13,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var pin: UIBarButtonItem!
     @IBOutlet weak var refresh: UIBarButtonItem!
+    @IBOutlet weak var exit: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,7 +123,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         print("reload aqui")
             self.mapView.reloadInputViews()
     }
-    
 }
 
 

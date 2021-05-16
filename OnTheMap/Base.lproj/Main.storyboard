@@ -113,7 +113,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fnd-kR-sXD">
-                                <rect key="frame" x="0.0" y="56" width="375" height="542"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="493"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MapTableViewCell" id="LBx-7g-gJN">
                                         <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
@@ -139,6 +139,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jBB-jD-A3G"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="On The Map" id="O7x-tE-rUY">
                         <barButtonItem key="leftBarButtonItem" title="Pin" image="icon_pin" width="4" id="SF2-9a-Txd">
                             <connections>
@@ -147,14 +148,13 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Refresh" image="icon_refresh" id="nXp-ub-Kvz">
                             <connections>
-                                <action selector="refreshMap:" destination="a3T-yr-njH" id="iFF-25-PXc"/>
+                                <action selector="logoutTapped:" destination="a3T-yr-njH" id="LJu-iQ-jIF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="pin" destination="SF2-9a-Txd" id="FHp-NU-Aat"/>
-                        <outlet property="refresh" destination="nXp-ub-Kvz" id="wVu-xO-bAN"/>
                         <outlet property="tableView" destination="fnd-kR-sXD" id="foW-vC-nqa"/>
                         <segue destination="nl5-J1-4XH" kind="presentation" identifier="Location" id="kR5-Eo-4c7"/>
                     </connections>
@@ -208,7 +208,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cQD-Ut-hzl">
-                                <rect key="frame" x="0.0" y="56" width="375" height="542"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="493"/>
                                 <connections>
                                     <outlet property="delegate" destination="zd6-fh-MSS" id="9ni-9A-s7s"/>
                                 </connections>
@@ -223,6 +223,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rZ4-Oc-a55"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="On The Map" id="XlS-k7-boa">
                         <barButtonItem key="leftBarButtonItem" title="Pin" image="icon_pin" width="4" id="Zvb-yy-cib">
                             <connections>
@@ -231,15 +232,14 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Refresh" image="icon_refresh" id="Wl1-KB-iee">
                             <connections>
-                                <action selector="refreshMap:" destination="zd6-fh-MSS" id="9l3-5s-dry"/>
+                                <action selector="logoutTapped:" destination="zd6-fh-MSS" id="Zmd-wU-U3H"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="cQD-Ut-hzl" id="en4-2r-tIa"/>
                         <outlet property="pin" destination="Zvb-yy-cib" id="kd7-19-VC4"/>
-                        <outlet property="refresh" destination="Wl1-KB-iee" id="urx-WS-DcV"/>
                         <segue destination="nl5-J1-4XH" kind="presentation" identifier="Location" id="Xz9-UE-0bI"/>
                     </connections>
                 </viewController>
@@ -270,25 +270,25 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="EYo-M1-NS0">
-                                <rect key="frame" x="0.0" y="53" width="375" height="567.5"/>
+                                <rect key="frame" x="0.0" y="53" width="375" height="548"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="b8u-tj-DLh">
-                                        <rect key="frame" x="95" y="0.0" width="185.5" height="170.5"/>
+                                        <rect key="frame" x="95" y="0.0" width="185.5" height="164"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0S-hf-Aaq">
-                                                <rect key="frame" x="0.0" y="0.0" width="185.5" height="57"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="185.5" height="54.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="studying" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewX-63-hAW">
-                                                <rect key="frame" x="31" y="57" width="123" height="56.5"/>
+                                                <rect key="frame" x="31" y="54.5" width="123" height="55"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="today ?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2hB-sG-mEd">
-                                                <rect key="frame" x="45.5" y="113.5" width="94.5" height="57"/>
+                                                <rect key="frame" x="45.5" y="109.5" width="94.5" height="54.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 <nil key="highlightedColor"/>
@@ -297,10 +297,10 @@
                                         <color key="backgroundColor" red="0.8391147255897522" green="0.94337195158004761" blue="0.95533746480941772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZbP-UF-krt">
-                                        <rect key="frame" x="0.0" y="198.5" width="375" height="170.5"/>
+                                        <rect key="frame" x="0.0" y="192" width="375" height="164"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" text="Enter Your Location Here" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YPA-g6-stc">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="170.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="164"/>
                                                 <color key="backgroundColor" red="0.062614127990000004" green="0.69008302690000001" blue="0.93573051689999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -315,10 +315,10 @@
                                         <color key="tintColor" red="0.062614127990000004" green="0.69008302690000001" blue="0.93573051689999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="DRk-Wu-PAR">
-                                        <rect key="frame" x="0.0" y="397" width="375" height="170.5"/>
+                                        <rect key="frame" x="0.0" y="384" width="375" height="164"/>
                                         <subviews>
                                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="0er-r1-vJh">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="170.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="164"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YAM-yT-7t2">
                                                         <rect key="frame" x="97" y="8" width="181" height="50"/>
@@ -339,7 +339,6 @@
                                                     <constraint firstItem="YAM-yT-7t2" firstAttribute="top" secondItem="0er-r1-vJh" secondAttribute="top" constant="8" id="hXC-Eb-Tuy"/>
                                                     <constraint firstItem="YAM-yT-7t2" firstAttribute="leading" secondItem="0er-r1-vJh" secondAttribute="leading" constant="97" id="meX-1J-gOz"/>
                                                     <constraint firstItem="YAM-yT-7t2" firstAttribute="top" secondItem="0er-r1-vJh" secondAttribute="topMargin" id="nB1-Ns-eMH"/>
-                                                    <constraint firstAttribute="bottom" secondItem="YAM-yT-7t2" secondAttribute="bottom" constant="112.5" id="ygo-hM-7GN"/>
                                                 </constraints>
                                             </view>
                                         </subviews>

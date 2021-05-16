@@ -275,8 +275,29 @@ class OTMUser {
     }
     
     //delete - 10
-    class func Logout(completion: @escaping (Bool, Error?) -> Void) {
-        //code
+    class func logout(completion: @escaping () -> Void) {
+        var request = URLRequest(url: Enpoints.deleteSession.url)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if error != nil { // Handle error…
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+            let range = 5..<data!.count
+            let newData = data?.subdata(in: range) /* subset response data! */
+            print(String(data: newData!, encoding: .utf8)!)
+        }
+        task.resume()
     }
 }
 
