@@ -275,7 +275,8 @@ class OTMUser {
     }
     
     //delete - 10
-    class func logout(completion: @escaping () -> Void) {
+    class func logout(completion: @escaping (Bool, Error?) -> Void) {
+        
         var request = URLRequest(url: Enpoints.deleteSession.url)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
@@ -290,12 +291,24 @@ class OTMUser {
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…
                 DispatchQueue.main.async {
-                    completion()
+                    completion(false, error)
                 }
             }
-            let range = 5..<data!.count
-            let newData = data?.subdata(in: range) /* subset response data! */
-            print(String(data: newData!, encoding: .utf8)!)
+            
+            do {
+                let range = 5..<data!.count
+                let newData = data?.subdata(in: range)
+                
+                let decoder = JSONDecoder()
+                let sessionResponse = try decoder.decode(logoutResponse.self, from: newData!)
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
         }
         task.resume()
     }
