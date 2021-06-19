@@ -127,38 +127,7 @@ class OTMUser {
             } else {
                 completion(nil, error)
             }
-        }
-        
-        //
-        //        let request = URLRequest(url: Enpoints.getUser.url)
-        //        print(Enpoints.getUser.url)
-        //        let session = URLSession.shared
-        //        let task = session.dataTask(with: request) { data, response, error in
-        //            if error != nil {
-        //                completion(nil, error)
-        //            }
-        //            let range = 5..<data!.count
-        //            let newData = data?.subdata(in: range)
-        //            print(String(data: data!, encoding: .utf8)!)
-        //            do {
-        //                let range = 5..<data!.count
-        //                let newData = data?.subdata(in: range)
-        //
-        //                let decoder = JSONDecoder()
-        //                let getUserResponse = try decoder.decode(GetUserResponse.self, from: newData!)
-        //                UserModel.user = getUserResponse
-        //                DispatchQueue.main.async {
-        //                    completion(getUserResponse, error)
-        //                }
-        //            }
-        //            catch {
-        //                DispatchQueue.main.async {
-        //                    completion(nil, error)
-        //                }
-        //            }
-        //            completion(nil, error)
-        //        }
-        //        task.resume()
+        } 
     }
     
     //post - 9
@@ -173,47 +142,6 @@ class OTMUser {
                 completion(nil, error)
             }
         }
-        // }
-        //        var request = URLRequest(url: Endpoints.createSessionId.url)
-        //
-        //        request.httpMethod = "POST"
-        //        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        //        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        //
-        //        request.httpBody =
-        //            ("{" +
-        //                "\"udacity\": " +
-        //                "{" +
-        //                "\"username\":\"\(username)\"," +
-        //                "\"password\": \"\(password)\"" +
-        //                "}" +
-        //                "}").data(using: .utf8)
-        //
-        //        let session = URLSession.shared
-        //        let task = session.dataTask(with: request) { data, response, error in
-        //
-        //            if error != nil {
-        //                DispatchQueue.main.async {
-        //                    completion(nil, error)
-        //                }
-        //            }
-        //
-        //            do {
-        //                let range = 5..<data!.count
-        //                let newData = data?.subdata(in: range)
-        //
-        //                let decoder = JSONDecoder()
-        //                let sessionResponse = try decoder.decode(SessionResponse.self, from: newData!)
-        //                DispatchQueue.main.async {
-        //                    completion(sessionResponse, nil)
-        //                }
-        //            } catch {
-        //                DispatchQueue.main.async {
-        //                    completion(nil, error)
-        //                }
-        //            }
-        //        }
-        //        task.resume()
     }
     
     //get - 5
@@ -225,37 +153,6 @@ class OTMUser {
                 completion([], false, error)
             }
         }
-        
-        //        var request = URLRequest(url: Endpoints.getStudentLocation.url)
-        //        print(Endpoints.getStudentLocation.url)
-        //        // let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
-        //        let session = URLSession.shared
-        //        let task = session.dataTask(with: request) { data, response, error  in
-        //            if error != nil { // Handle error...
-        //                DispatchQueue.main.async {
-        //                    completion([], false, error)
-        //                }
-        //            }
-        //            print(String(data: data!, encoding: .utf8)!)
-        //
-        //            let decoder = JSONDecoder()
-        //
-        //            do {
-        //                let responseObject = try decoder.decode(MapResponse.self, from: data!)
-        //                DispatchQueue.main.async {
-        //                    completion(responseObject.results, true, nil)
-        //                }
-        //            }
-        //            catch {
-        //                print(error)
-        //                //... falhar
-        //                DispatchQueue.main.async {
-        //                    completion([], false, error)
-        //                }
-        //            }
-        //
-        //        }
-        //        task.resume()
     }
     
     //post - 6
@@ -270,56 +167,10 @@ class OTMUser {
             }
         }
     }
-//        var request = URLRequest(url: Endpoints.postStudentLocation.url)
-//        request.httpMethod = "POST"
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.httpBody =
-//            ("{" +
-//                "\"uniqueKey\": \"1234\"," +
-//                "\"firstName\": \"AAAAAAFernanda\"," +
-//                "\"lastName\": \"Brasil\"," +
-//                "\"mapString\": \"Rio de Janeiro, RJ\"," +
-//                "\"mediaURL\": \"https://udacity.com\"," +
-//                "\"latitude\": -22.96466749110056," +
-//                "\"longitude\": -43.17709978734727" +
-//                "}").data(using: .utf8)
-//
-//        let session = URLSession.shared
-//        let task = session.dataTask(with: request) { data, response, error in
-//            if error != nil { // Handle error…
-//                DispatchQueue.main.async {
-//                    completion(nil, error)
-//                }
-//            }
-//            print(String(data: data!, encoding: .utf8)!)
-//            do {
-//                let range = 5..<data!.count
-//                let newData = data?.subdata(in: range)
-//                print(String(data: newData!, encoding: .utf8)!)
-//
-//                let decoder = JSONDecoder()
-//                let studentResponse = try decoder.decode(StudentResponse.self, from: data!)
-//                DispatchQueue.main.async {
-//                    completion(studentResponse, nil)
-//                }
-//            }
-//            catch {
-//                print(error)
-//                //... falhar
-//                DispatchQueue.main.async {
-//                    completion(nil, error)
-//                }
-//            }
-//        }
-//        task.resume()
-//    }
     
     //put - 7
     class func putStudentLocation(completion: @escaping (Bool, Error?) -> Void) {
-        //  let urlString = "https://onthemap-api.udacity.com/v1/StudentLocation/8ZExGR5uX8"
         var request = URLRequest(url: Endpoints.putStudentLocation.url)
-        //   let url = URL(string: urlString)
-        //   var request = URLRequest(url: url!)
         request.httpMethod = "PUT"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody =
@@ -333,11 +184,13 @@ class OTMUser {
                 "\"longitude\": -43.17709978734727" +
                 "}").data(using: .utf8)
         let session = URLSession.shared
+        
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…
                 return
             }
             print(String(data: data!, encoding: .utf8)!)
+            print(" Aqui resposta .\(response)")
         }
         task.resume()
     }

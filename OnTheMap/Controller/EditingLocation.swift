@@ -11,17 +11,7 @@ import MapKit
 import CoreLocation
 
 class EditingLocation: UIViewController, CLLocationManagerDelegate {
-    
-    /*
-     
-     para fazer o planejamento tecnico vou precisar:
-     
-     cancelar alteracao e retornar para a tela anterior
-     digitar a localizacao
-     chamar a funcao de procurar no mapa
-     
-     */
-    
+
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var cancel: UIBarButtonItem!
     @IBOutlet weak var findMap: UIButton!
@@ -60,27 +50,19 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
-        //EMITIR UM UIALERT AQUI!!!!!
-        print("Error aquiiii \(error)")
+        print("Error \(error)")
     }
     
     @IBAction func findMap(_ sender: UIButton) {
         // salvar a localizacao informada no locationTextField para pesquisar na  tela SearchLocation
-        print("findMap")
         self.performSegue(withIdentifier: "search", sender: nil)
         
-                OTMUser.putStudentLocation() { studentResponse, error in
-                    //    MapModel.maplist = GetUserResponse
-                    self.performSegue(withIdentifier: "search", sender: nil)
-                }
+        OTMUser.putStudentLocation() { studentResponse, error in
+            //    MapModel.maplist = GetUserResponse
+            self.performSegue(withIdentifier: "search", sender: nil)
+        }
     }
-    
-    //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    //        print("Aqui!")
-    //        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-    //        print("locations = \(locValue.latitude) \(locValue.longitude)")
-    //    }
-    
+        
     @IBAction func cancel(_ sender: Any) {
         print("cancel")
         DispatchQueue.main.async {
@@ -93,24 +75,24 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate {
             if(userLocation != nil)
             {
                 if let destinationVC = segue.destination as? SearchLocationController {
-                print(userLocation.coordinate.latitude)
-                
-                destinationVC.editingMap =
-                    Map(createdAt: "",
-                        firstName: "",
-                        lastName: "",
-                        latitude:  userLocation.coordinate.latitude,
-                        longitude: userLocation.coordinate.longitude,
-                        mapString: "",
-                        mediaString: "",
-                        mediaURL: "",
-                        objectId: "",
-                        uniqueKey: "",
-                        updatedAt: "")
+                    print(userLocation.coordinate.latitude)
+                    
+                    destinationVC.editingMap =
+                        Map(createdAt: "",
+                            firstName: "",
+                            lastName: "",
+                            latitude:  userLocation.coordinate.latitude,
+                            longitude: userLocation.coordinate.longitude,
+                            mapString: "",
+                            mediaString: "",
+                            mediaURL: "",
+                            objectId: "",
+                            uniqueKey: "",
+                            updatedAt: "")
                 }
             }
             if(userLocation == nil){
-                print("erro aquiiiiii")
+                print("error")
             }
         }
     }

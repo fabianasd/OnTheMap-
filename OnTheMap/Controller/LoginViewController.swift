@@ -58,7 +58,6 @@ class LoginViewController: UIViewController {
         emailTextField.isEnabled = !loggingIn //o botão fica desabilitado
         passwordTextField.isEnabled = !loggingIn
         loginButton.isEnabled = !loggingIn
-        //    loginViaWebsiteButton.isEnabled = !loggingIn
     }
     
     func showLoginFailure(message: String) { //valida tentativa de login falha

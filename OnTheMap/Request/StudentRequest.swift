@@ -17,12 +17,12 @@ struct StudentRequest: Codable {
     let latitude: Double
     let longitude: Double
 }
-    enum CodingKeys: String, CodingKey {
-        case uniqueKey
-        case firstName
-        case lastName
-        case mapString
-        case mediaURL
-        case latitude
-        case longitude
+enum CodingKeys: String, CodingKey {
+    case uniqueKey
+    case firstName
+    case lastName
+    case mapString
+    case mediaURL
+    case latitude
+    case longitude
 }

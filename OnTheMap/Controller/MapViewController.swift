@@ -78,13 +78,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-    //        func mapViewList(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-    //
-    //            if control == annotationView.rightCalloutAccessoryView {
-    //                let app = UIApplication.shared
-    //                app.openURL(NSURL(string: (annotationView.annotation?.subtitle!!)!)! as URL)
-    //            }
-    //        }
     
     // MARK: - Sample Data
     
@@ -111,14 +104,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         self.present(alert, animated: true, completion: nil)
     }
-    //
-    //    func editing(getUserResponse: GetUserResponse?, error: Error?) {
-    //        if GetUserResponse.CodingKeys.lastName != nil {
-    //                self.performSegue(withIdentifier: "Location", sender: nil)
-    ////               } else { //valida email e senha
-    ////                   showEditingFailure(message: error?.localizedDescription ?? "")
-    ////               }
-    //           }
 }
 
 

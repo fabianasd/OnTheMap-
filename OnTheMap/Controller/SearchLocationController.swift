@@ -10,12 +10,7 @@ import UIKit
 import MapKit
 
 class SearchLocationController: UIViewController, MKMapViewDelegate {
-    /*
-     ao cancelar deve voltar para tela anterior editingLocation (confirmar tela)
-     informar link do linkedin no textField
-     mostrar um preview no map (confirmar)
-     ao clicar em submit cadastrar o link junto com nome e localizacao
-     */
+
     @IBOutlet weak var linkLinkedin: UITextField!
     @IBOutlet weak var cancel: UIBarButtonItem!
     @IBOutlet weak var submit: UIButton!
@@ -42,7 +37,6 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
         }
         DispatchQueue.main.async {
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-          //   self.performSegue(withIdentifier: "submit", sender: nil)
         }
     }
     
@@ -89,8 +83,6 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        //        annotation.title = "\(first) \(last)"
-        //        annotation.subtitle = mediaURL
         
         self.mapView.addAnnotation(annotation)
     }
