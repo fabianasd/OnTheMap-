@@ -13,7 +13,6 @@ class MapViewControllerList: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pin: UIBarButtonItem!
-    @IBOutlet weak var refresh: UIBarButtonItem!
     @IBOutlet weak var exit: UIBarButtonItem!
     
     var selectedIndex = 0

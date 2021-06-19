@@ -69,10 +69,10 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate {
         print("findMap")
         self.performSegue(withIdentifier: "search", sender: nil)
         
-        //        OTMUser.postStudentLocation() { studentResponse, error in
-        //            //    MapModel.maplist = GetUserResponse
-        //            self.performSegue(withIdentifier: "search", sender: nil)
-        //        }
+                OTMUser.putStudentLocation() { studentResponse, error in
+                    //    MapModel.maplist = GetUserResponse
+                    self.performSegue(withIdentifier: "search", sender: nil)
+                }
     }
     
     //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

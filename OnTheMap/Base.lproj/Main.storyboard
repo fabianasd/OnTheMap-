@@ -154,6 +154,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="exit" destination="nXp-ub-Kvz" id="d0b-cH-EKZ"/>
                         <outlet property="pin" destination="SF2-9a-Txd" id="FHp-NU-Aat"/>
                         <outlet property="tableView" destination="fnd-kR-sXD" id="foW-vC-nqa"/>
                         <segue destination="nl5-J1-4XH" kind="presentation" identifier="Location" id="kR5-Eo-4c7"/>

@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
         if sessionResponse?.error == nil && sessionResponse != nil {
             UserModel.session = sessionResponse!
             OTMUser.key = (sessionResponse?.account?.key!)!
-//            OTMUser.getUser(completion: handleGetUserResponse(getUserResponse:error:))
+            OTMUser.getUser(completion: handleGetUserResponse(getUserResponse:error:))
             self.performSegue(withIdentifier: "completeLogin", sender: nil)
             
         } else {

@@ -19,6 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         listStudents()
+        self.mapView.reloadInputViews()
     }
     
     // MARK: - MKMapViewDelegate
@@ -118,11 +119,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     ////                   showEditingFailure(message: error?.localizedDescription ?? "")
     ////               }
     //           }
-    
-    @IBAction func refreshMap(_ sender: Any) {
-        print("reload aqui")
-            self.mapView.reloadInputViews()
-    }
 }
 
 
