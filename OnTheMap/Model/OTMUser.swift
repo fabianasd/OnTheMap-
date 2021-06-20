@@ -33,7 +33,7 @@ class OTMUser {
             switch self {
             case .getUser: return Endpoints.base + "/users/\(OTMUser.key)" //recuperar algumas informacoes antes de postar no Parse
             case .createSessionId: return Endpoints.base + "/session" //autenticar sessao
-            case .getStudentLocation: return Endpoints.base + "/StudentLocation?order=-updateAt" //obter a localizacao de varios alunos ao mesmo tempo - decrescente
+            case .getStudentLocation: return Endpoints.base + "/StudentLocation?order=-updatedAt" //obter a localizacao de varios alunos ao mesmo tempo - decrescente
             case .postStudentLocation: return Endpoints.base + "/StudentLocation" //criar um novo local de aluno
             case .putStudentLocation: return Endpoints.base + "/StudentLocation/\(OTMUser.Auth.objectId)" //atualizar a localização de um aluno existente
             case .deleteSession: return Endpoints.base + "/session" //logout
@@ -190,7 +190,6 @@ class OTMUser {
                 return
             }
             print(String(data: data!, encoding: .utf8)!)
-            print(" Aqui resposta .\(response)")
         }
         task.resume()
     }

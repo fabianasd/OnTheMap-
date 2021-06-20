@@ -66,7 +66,6 @@ extension MapViewControllerList: UITableViewDataSource, UITableViewDelegate {
     }
     
     @IBAction func refreshMap(_ sender: Any) {
-        print("reload aqui")
         self.tableView.reloadInputViews()
     }
 }

@@ -8,14 +8,27 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextViewDelegate {
     
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var lodingActivity: UIActivityIndicatorView!
-    @IBOutlet weak var loginFacebook: UIButton!
+    @IBOutlet weak var textView: UITextView!
+    
+        override func viewDidLoad() {
+            let attributedString = NSMutableAttributedString(string: "Want to learn iOS? You should visit the best source of free iOS tutorials!")
+            attributedString.addAttribute(.link, value: "https://www.google.com", range: NSRange(location: 19, length: 55))
+
+            textView.attributedText = attributedString
+        }
+
+        func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+            UIApplication.shared.open(URL)
+            return false
+        }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -32,9 +45,9 @@ class LoginViewController: UIViewController {
             completion: handleSessionResponse(sessionResponse:error:))
     }
     
-    func handleGetUserResponse(getUserResponse: GetUserResponse?, error: Error?) {
-        print("handleLoginResponse")
-    }
+        func handleGetUserResponse(getUserResponse: GetUserResponse?, error: Error?) {
+            print("handleLoginResponse")
+        }
     
     func handleSessionResponse(sessionResponse: SessionResponse?, error: Error?) {
         setLoggingIn(false)
