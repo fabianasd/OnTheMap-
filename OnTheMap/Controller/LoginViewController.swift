@@ -18,18 +18,19 @@ class LoginViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var textView: UITextView!
     
         override func viewDidLoad() {
-            let attributedString = NSMutableAttributedString(string: "Want to learn iOS? You should visit the best source of free iOS tutorials!")
-            attributedString.addAttribute(.link, value: "https://www.google.com", range: NSRange(location: 19, length: 55))
+            let attributedString = NSMutableAttributedString(string: "Don`t have an account? Sign Up")
+            attributedString.addAttribute(.link, value: "https://www.udacity.com", range: NSRange(location: 22, length: 8))
 
             textView.attributedText = attributedString
+            //textView.center = CGPoint(x: <#T##Int#>, y: <#T##Int#>)
+            textView.textAlignment = .center
         }
 
         func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
             UIApplication.shared.open(URL)
             return false
         }
-    
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

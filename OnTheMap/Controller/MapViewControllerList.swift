@@ -14,6 +14,7 @@ class MapViewControllerList: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pin: UIBarButtonItem!
     @IBOutlet weak var exit: UIBarButtonItem!
+    @IBOutlet weak var refresh: UIBarButtonItem!
     
     var selectedIndex = 0
     
@@ -49,6 +50,7 @@ extension MapViewControllerList: UITableViewDataSource, UITableViewDelegate {
         let map = MapModel.maplist[indexPath.row]
         
         cell.textLabel?.text = map.firstName
+        cell.detailTextLabel?.text = map.mediaURL
         cell.imageView?.image = UIImage(named: "icon_pin")
         
         return cell

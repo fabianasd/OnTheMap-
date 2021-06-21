@@ -104,6 +104,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         self.present(alert, animated: true, completion: nil)
     }
+    
+    @IBAction func refresh(_ sender: Any) {
+        self.mapView.reloadInputViews()
+    }
+    
 }
 
 
