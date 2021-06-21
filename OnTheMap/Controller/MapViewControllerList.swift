@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class MapViewControllerList: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -54,6 +53,11 @@ extension MapViewControllerList: UITableViewDataSource, UITableViewDelegate {
         cell.imageView?.image = UIImage(named: "icon_pin")
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let map = MapModel.maplist[indexPath.row]
+        UIApplication.shared.openURL(NSURL(string: map.mediaURL) as! URL)
     }
     
     @IBAction func editingLocation() {

@@ -22,7 +22,6 @@ class LoginViewController: UIViewController, UITextViewDelegate {
             attributedString.addAttribute(.link, value: "https://www.udacity.com", range: NSRange(location: 22, length: 8))
 
             textView.attributedText = attributedString
-            //textView.center = CGPoint(x: <#T##Int#>, y: <#T##Int#>)
             textView.textAlignment = .center
         }
 
