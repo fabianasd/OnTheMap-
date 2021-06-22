@@ -106,7 +106,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func refresh(_ sender: Any) {
-        self.mapView.reloadInputViews()
+        listStudents()
+       // self.mapView.reloadInputViews()
     }
     
 }

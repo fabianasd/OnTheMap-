@@ -30,6 +30,7 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func submit(_ sender: Any) {
+        //validar texto informado
         if(linkLinkedin != nil)
         {
             editingMap.mediaURL = linkLinkedin.text!
@@ -85,6 +86,7 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
         annotation.coordinate = coordinate
         
         self.mapView.addAnnotation(annotation)
+        self.mapView.showAnnotations(self.mapView.annotations, animated: true)
     }
     
 }

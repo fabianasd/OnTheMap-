@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 
 class EditingLocation: UIViewController, CLLocationManagerDelegate {
-
+    
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var cancel: UIBarButtonItem!
     @IBOutlet weak var findMap: UIButton!
@@ -55,14 +55,13 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func findMap(_ sender: UIButton) {
         // salvar a localizacao informada no locationTextField para pesquisar na  tela SearchLocation
-        self.performSegue(withIdentifier: "search", sender: nil)
-        
-        OTMUser.putStudentLocation() { studentResponse, error in
-            //    MapModel.maplist = GetUserResponse
-            self.performSegue(withIdentifier: "search", sender: nil)
-        }
+        geocodePosition(newLocation: locationTextField.text!)
+//        OTMUser.putStudentLocation() { studentResponse, error in
+//            //    MapModel.maplist = GetUserResponse
+//            self.performSegue(withIdentifier: "search", sender: nil)
+//        }
     }
-        
+    
     @IBAction func cancel(_ sender: Any) {
         print("cancel")
         DispatchQueue.main.async {
@@ -97,4 +96,32 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func showAlert(title: String, message: String) {
+         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+         show(alertVC, sender: nil)
+     }
+    
+    func geocodePosition(newLocation: String) {
+        CLGeocoder().geocodeAddressString(newLocation) { (newMarker, error) in
+            if let error = error {
+                self.showAlert(title: "Location Incorrect", message: "Check the location informed!")
+            } else {
+                var location: CLLocation?
+                
+                if let marker = newMarker, marker.count > 0 {
+                    location = marker.first?.location
+                }
+                
+                if let location = location {
+                    self.userLocation = location
+                    self.performSegue(withIdentifier: "search", sender: location)
+                } else {
+                    self.showAlert(title: "Alert", message: "Please try again later.")
+             //       self.setLoading(false)
+                    print("there was an error.")
+                }
+            }
+        }
+    }
 }
