@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class SearchLocationController: UIViewController, MKMapViewDelegate {
-
+    
     @IBOutlet weak var linkLinkedin: UITextField!
     @IBOutlet weak var cancel: UIBarButtonItem!
     @IBOutlet weak var submit: UIButton!
@@ -29,15 +29,37 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
         sender.text = ""
     }
     
+    func handleStudentResponse(studentResponse: StudentResponse?, error: Error?) {
+        if let response = error {
+            print(error)
+            print(response)
+            let alert = UIAlertController(title: "Warning", message: "URL not informed!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in return
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            DispatchQueue.main.async {
+                self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
     @IBAction func submit(_ sender: Any) {
-        //validar texto informado
-        if(linkLinkedin != nil)
+        //ir para tela de map e mostrar as informacoes salvas aqui
+        //tem que ter valor informado
+        if(linkLinkedin.text != "")
         {
             editingMap.mediaURL = linkLinkedin.text!
             MapModel.maplist.append(editingMap)
-        }
-        DispatchQueue.main.async {
-            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+            //salvar informacoes
+            OTMUser.postStudentLocation(uniqueKey: 0, firstName: "", lastName: "", mapString: "", mediaURL: linkLinkedin.text!, latitude: 0, longitude: 0, completion:handleStudentResponse(studentResponse:error:))
+        } //senao retorna alerta
+        else {
+            let alert = UIAlertController(title: "Warning", message: "URL not informed!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in return
+            }))
+            self.present(alert, animated: true, completion: nil)
+            return
         }
     }
     
