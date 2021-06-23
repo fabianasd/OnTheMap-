@@ -36,7 +36,6 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate {
         locationManager.requestAlwaysAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
-            //locationManager.startUpdatingHeading()
         }
     }
     
@@ -54,12 +53,7 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func findMap(_ sender: UIButton) {
-        // salvar a localizacao informada no locationTextField para pesquisar na  tela SearchLocation
         geocodePosition(newLocation: locationTextField.text!)
-//        OTMUser.putStudentLocation() { studentResponse, error in
-//            //    MapModel.maplist = GetUserResponse
-//            self.performSegue(withIdentifier: "search", sender: nil)
-//        }
     }
     
     @IBAction func cancel(_ sender: Any) {
@@ -97,10 +91,10 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate {
     }
     
     func showAlert(title: String, message: String) {
-         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-         show(alertVC, sender: nil)
-     }
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(alertVC, sender: nil)
+    }
     
     func geocodePosition(newLocation: String) {
         CLGeocoder().geocodeAddressString(newLocation) { (newMarker, error) in
@@ -118,7 +112,6 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate {
                     self.performSegue(withIdentifier: "search", sender: location)
                 } else {
                     self.showAlert(title: "Alert", message: "Please try again later.")
-             //       self.setLoading(false)
                     print("there was an error.")
                 }
             }

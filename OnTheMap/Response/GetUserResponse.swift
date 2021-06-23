@@ -2,7 +2,7 @@
 //  GetUserResponse.swift
 //  OnTheMap
 //
-//  Created by Macbook on 08/05/21.
+//  Created by Fabiana Petrovick on 08/05/21.
 //  Copyright © 2021 Fabiana Petrovick. All rights reserved.
 //
 

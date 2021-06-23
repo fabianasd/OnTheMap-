@@ -92,6 +92,7 @@ class OTMUser {
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
+                
                 return
             }
             let decoder = JSONDecoder()
@@ -102,9 +103,12 @@ class OTMUser {
                     completion(responseObject, nil)
                 }
             } catch {
+                print(String(data: data, encoding: .utf8)!)
+                
                 do {
                     let range = 5..<data.count
                     let newData = data.subdata(in: range)
+                    print(String(data: data, encoding: .utf8)!)
                     
                     let decoder = JSONDecoder()
                     let sessionResponse = try decoder.decode(SessionResponse.self, from: newData)
@@ -128,7 +132,7 @@ class OTMUser {
             } else {
                 completion(nil, error)
             }
-        } 
+        }
     }
     
     //post - 9
@@ -157,7 +161,7 @@ class OTMUser {
     }
     
     //post - 6
-    class func postStudentLocation(uniqueKey: Int, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completion: @escaping (StudentResponse?, Error?) -> Void) {
+    class func postStudentLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completion: @escaping (StudentResponse?, Error?) -> Void) {
         let body = StudentRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)
         
         taskForPOSTRequest(url: Endpoints.postStudentLocation.url, sessionResponse: StudentResponse.self, body: body) { response, error in

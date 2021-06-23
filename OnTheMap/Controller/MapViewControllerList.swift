@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MapKit
 
-class MapViewControllerList: UIViewController {
+class MapViewControllerList: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pin: UIBarButtonItem!
@@ -71,8 +72,27 @@ extension MapViewControllerList: UITableViewDataSource, UITableViewDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func addStudentsToMap(locations: [Map]) {
+        for map in locations {
+            
+            let first = map.firstName as! String
+            let last = map.lastName as! String
+            let mediaURL = map.mediaURL as! String
+        }
+    }
+    
+    func listStudents() {
+        OTMUser.getStudentLocation(completion: handleStudentResponse(maps:success:error:))
+    }
+    
+    func handleStudentResponse(maps: [Map], success: Bool, error: Error?) {
+        addStudentsToMap(locations: maps)
+    }
+    
     @IBAction func refreshMap(_ sender: Any) {
-        self.tableView.reloadInputViews()
+   //     listStudents()
+//        self.tableView.reloadInputViews()
+        self.tableView.reloadData()
     }
 }
 

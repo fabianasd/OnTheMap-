@@ -45,14 +45,12 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func submit(_ sender: Any) {
-        //ir para tela de map e mostrar as informacoes salvas aqui
-        //tem que ter valor informado
         if(linkLinkedin.text != "")
         {
             editingMap.mediaURL = linkLinkedin.text!
             MapModel.maplist.append(editingMap)
             //salvar informacoes
-            OTMUser.postStudentLocation(uniqueKey: 0, firstName: "", lastName: "", mapString: "", mediaURL: linkLinkedin.text!, latitude: 0, longitude: 0, completion:handleStudentResponse(studentResponse:error:))
+            OTMUser.postStudentLocation(uniqueKey: editingMap.uniqueKey ?? " ", firstName: "On The Map", lastName: editingMap.lastName ?? " ", mapString: editingMap.mapString ?? " ", mediaURL: linkLinkedin.text!, latitude: editingMap.latitude, longitude: editingMap.longitude, completion:handleStudentResponse(studentResponse:error:))
         } //senao retorna alerta
         else {
             let alert = UIAlertController(title: "Warning", message: "URL not informed!", preferredStyle: .alert)
