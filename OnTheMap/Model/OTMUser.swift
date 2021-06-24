@@ -31,11 +31,11 @@ class OTMUser {
         
         var stringValue: String {
             switch self {
-            case .getUser: return Endpoints.base + "/users/\(OTMUser.key)" //recuperar algumas informacoes antes de postar no Parse
-            case .createSessionId: return Endpoints.base + "/session" //autenticar sessao
-            case .getStudentLocation: return Endpoints.base + "/StudentLocation?order=-updatedAt" //obter a localizacao de varios alunos ao mesmo tempo - decrescente
-            case .postStudentLocation: return Endpoints.base + "/StudentLocation" //criar um novo local de aluno
-            case .putStudentLocation: return Endpoints.base + "/StudentLocation/\(OTMUser.Auth.objectId)" //atualizar a localização de um aluno existente
+            case .getUser: return Endpoints.base + "/users/\(OTMUser.key)"
+            case .createSessionId: return Endpoints.base + "/session"
+            case .getStudentLocation: return Endpoints.base + "/StudentLocation?order=-updatedAt"
+            case .postStudentLocation: return Endpoints.base + "/StudentLocation"
+            case .putStudentLocation: return Endpoints.base + "/StudentLocation/\(OTMUser.Auth.objectId)"
             case .deleteSession: return Endpoints.base + "/session" //logout
             }
         }
@@ -47,7 +47,6 @@ class OTMUser {
     @discardableResult class func taskForGETRequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping(ResponseType?, Error?) -> Void) -> URLSessionTask {
         let task = URLSession.shared.dataTask(with: url) { data, response, error  in
             guard let data = data else {
-                //acontece se houver um erro com a solicitação
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
@@ -57,7 +56,6 @@ class OTMUser {
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
-                    //se a analise JSON for bem-sucedida ou...
                     completion(responseObject, nil)
                 }
             } catch {
@@ -67,7 +65,6 @@ class OTMUser {
                         completion(nil, errorResponse)
                     }
                 } catch {
-                    //... falhar
                     DispatchQueue.main.async {
                         completion(nil, error)
                     }
@@ -88,7 +85,6 @@ class OTMUser {
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
-                //acontece se houver um erro com a solicitação
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
@@ -98,8 +94,7 @@ class OTMUser {
             let decoder = JSONDecoder()
             do {
                 let responseObject = try decoder.decode(SessionResponse.self, from: data)
-                DispatchQueue.main.async {//recarregamos os dados no thread principal usando assincrono.
-                    //se a analise JSON for bem-sucedida ou...
+                DispatchQueue.main.async {
                     completion(responseObject, nil)
                 }
             } catch {
@@ -116,7 +111,6 @@ class OTMUser {
                         completion(sessionResponse, nil)
                     }
                 } catch {
-                    //... falhar
                     completion(nil, error)
                 }
             }
@@ -124,7 +118,6 @@ class OTMUser {
         task.resume()
     }
     
-    //get - 11
     class func getUser(completion: @escaping (GetUserResponse?, Error?) -> Void) {
         taskForGETRequest(url: Endpoints.getUser.url, response: GetUserResponse.self) { response, error in
             if let response = response {
@@ -135,7 +128,6 @@ class OTMUser {
         }
     }
     
-    //post - 9
     class func createSessionId(username: String, password: String, completion: @escaping (SessionResponse?, Error?) -> Void) {
         let createSessionUdacity = CreateSessionUdacityRequest(username: username, password: password)
         let body = CreateSessionRequest(udacity: createSessionUdacity)
@@ -149,7 +141,6 @@ class OTMUser {
         }
     }
     
-    //get - 5
     class func getStudentLocation(completion: @escaping ([Map], Bool, Error?) -> Void) {
         taskForGETRequest(url: Endpoints.getStudentLocation.url, response: MapResponse.self) { response, error in
             if let response = response {
@@ -160,7 +151,6 @@ class OTMUser {
         }
     }
     
-    //post - 6
     class func postStudentLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completion: @escaping (StudentResponse?, Error?) -> Void) {
         let body = StudentRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)
         
@@ -173,7 +163,6 @@ class OTMUser {
         }
     }
     
-    //put - 7
     class func putStudentLocation(completion: @escaping (Bool, Error?) -> Void) {
         var request = URLRequest(url: Endpoints.putStudentLocation.url)
         request.httpMethod = "PUT"
@@ -181,7 +170,7 @@ class OTMUser {
         request.httpBody =
             ("{" +
                 "\"uniqueKey\": \"12344321\"," +
-                "\"firstName\": \"AAAAAAFernanda\"," +
+                "\"firstName\": \"On The Map\"," +
                 "\"lastName\": \"Brasil\"," +
                 "\"mapString\": \"Rio de Janeiro, RJ\"," +
                 "\"mediaURL\": \"https://udacity.com\"," +
@@ -191,7 +180,7 @@ class OTMUser {
         let session = URLSession.shared
         
         let task = session.dataTask(with: request) { data, response, error in
-            if error != nil { // Handle error…
+            if error != nil {
                 return
             }
             print(String(data: data!, encoding: .utf8)!)
@@ -199,7 +188,6 @@ class OTMUser {
         task.resume()
     }
     
-    //delete - 10
     class func logout(completion: @escaping (Bool, Error?) -> Void) {
         
         var request = URLRequest(url: Endpoints.deleteSession.url)
@@ -214,7 +202,7 @@ class OTMUser {
         }
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
-            if error != nil { // Handle error…
+            if error != nil {
                 DispatchQueue.main.async {
                     completion(false, error)
                 }

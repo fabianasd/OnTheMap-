@@ -68,12 +68,12 @@ class LoginViewController: UIViewController, UITextViewDelegate {
         } else {
             lodingActivity.stopAnimating()
         }
-        emailTextField.isEnabled = !loggingIn //o botão fica desabilitado
+        emailTextField.isEnabled = !loggingIn
         passwordTextField.isEnabled = !loggingIn
         loginButton.isEnabled = !loggingIn
     }
     
-    func showLoginFailure(message: String) { //valida tentativa de login falha
+    func showLoginFailure(message: String) {
         let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         show(alertVC, sender: nil)

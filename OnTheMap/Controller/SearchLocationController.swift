@@ -31,8 +31,6 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
     
     func handleStudentResponse(studentResponse: StudentResponse?, error: Error?) {
         if let response = error {
-            print(error)
-            print(response)
             let alert = UIAlertController(title: "Warning", message: "URL not informed!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in return
             }))
@@ -45,19 +43,18 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func submit(_ sender: Any) {
-        if(linkLinkedin.text != "")
+        
+      if let url = URL(string: self.linkLinkedin.text!),(UIApplication.shared.canOpenURL(url))
         {
             editingMap.mediaURL = linkLinkedin.text!
             MapModel.maplist.append(editingMap)
-            //salvar informacoes
             OTMUser.postStudentLocation(uniqueKey: editingMap.uniqueKey ?? " ", firstName: "On The Map", lastName: editingMap.lastName ?? " ", mapString: editingMap.mapString ?? " ", mediaURL: linkLinkedin.text!, latitude: editingMap.latitude, longitude: editingMap.longitude, completion:handleStudentResponse(studentResponse:error:))
-        } //senao retorna alerta
+        }
         else {
-            let alert = UIAlertController(title: "Warning", message: "URL not informed!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Warning", message: "URL not informed correct! Exemple: https://", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in return
             }))
             self.present(alert, animated: true, completion: nil)
-            return
         }
     }
     
@@ -66,9 +63,7 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
-    /* Map related functions*/
-    
+       
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         addPinToMap()
     }
@@ -108,6 +103,5 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
         self.mapView.addAnnotation(annotation)
         self.mapView.showAnnotations(self.mapView.annotations, animated: true)
     }
-    
 }
 

@@ -57,8 +57,16 @@ extension MapViewControllerList: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let map = MapModel.maplist[indexPath.row]
-        UIApplication.shared.openURL(NSURL(string: map.mediaURL) as! URL)
+        let data = MapModel.maplist[indexPath.row]
+        if let url =  URL(string: data.mediaURL){
+            UIApplication.shared.open(url, options: [:])
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Failed open URL", preferredStyle: .alert )
+            alert.addAction(UIAlertAction (title: "OK", style: .default, handler: { _ in
+                return
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func editingLocation() {
@@ -90,9 +98,7 @@ extension MapViewControllerList: UITableViewDataSource, UITableViewDelegate {
     }
     
     @IBAction func refreshMap(_ sender: Any) {
-   //     listStudents()
-//        self.tableView.reloadInputViews()
-        self.tableView.reloadData()
+        listStudents()
     }
 }
 

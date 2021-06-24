@@ -69,7 +69,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.mapView.addAnnotations(annotations)
     }
     
-    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
@@ -107,7 +106,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func refresh(_ sender: Any) {
         listStudents()
-       // self.mapView.reloadInputViews()
     }
     
 }
