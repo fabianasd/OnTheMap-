@@ -85,7 +85,11 @@ extension MapViewControllerList: UITableViewDataSource, UITableViewDelegate {
     }
     
     func handleStudentResponse(maps: [Map], success: Bool, error: Error?) {
-        addStudentsToMap(locations: maps)
+        if(success) {
+            addStudentsToMap(locations: maps)
+        } else {
+            self.showAlert(title: "Alert", message: "Failed")
+        }
     }
     
     @IBAction func refreshMap(_ sender: Any) {

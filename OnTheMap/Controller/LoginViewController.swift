@@ -17,19 +17,19 @@ class LoginViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var lodingActivity: UIActivityIndicatorView!
     @IBOutlet weak var textView: UITextView!
     
-        override func viewDidLoad() {
-            let attributedString = NSMutableAttributedString(string: "Don`t have an account? Sign Up")
-            attributedString.addAttribute(.link, value: "https://www.udacity.com", range: NSRange(location: 22, length: 8))
-
-            textView.attributedText = attributedString
-            textView.textAlignment = .center
-        }
-
-        func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-            UIApplication.shared.open(URL)
-            return false
-        }
+    override func viewDidLoad() {
+        let attributedString = NSMutableAttributedString(string: "Don`t have an account? Sign Up")
+        attributedString.addAttribute(.link, value: "https://www.udacity.com", range: NSRange(location: 22, length: 8))
         
+        textView.attributedText = attributedString
+        textView.textAlignment = .center
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        UIApplication.shared.open(URL)
+        return false
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -45,9 +45,9 @@ class LoginViewController: UIViewController, UITextViewDelegate {
             completion: handleSessionResponse(sessionResponse:error:))
     }
     
-        func handleGetUserResponse(getUserResponse: GetUserResponse?, error: Error?) {
-            print("handleLoginResponse")
-        }
+    func handleGetUserResponse(getUserResponse: GetUserResponse?, error: Error?) {
+        print("handleLoginResponse")
+    }
     
     func handleSessionResponse(sessionResponse: SessionResponse?, error: Error?) {
         setLoggingIn(false)
@@ -58,7 +58,7 @@ class LoginViewController: UIViewController, UITextViewDelegate {
             self.performSegue(withIdentifier: "completeLogin", sender: nil)
             
         } else {
-            showLoginFailure(message: (sessionResponse?.error ?? error?.localizedDescription) ?? "")
+            showAlert(title: "Login Failed", message: (sessionResponse?.error ?? error?.localizedDescription) ?? "")
         }
     }
     
@@ -71,12 +71,6 @@ class LoginViewController: UIViewController, UITextViewDelegate {
         emailTextField.isEnabled = !loggingIn
         passwordTextField.isEnabled = !loggingIn
         loginButton.isEnabled = !loggingIn
-    }
-    
-    func showLoginFailure(message: String) {
-        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
     }
 }
 
