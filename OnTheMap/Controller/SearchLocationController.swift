@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class SearchLocationController: UIViewController, MKMapViewDelegate {
+class SearchLocationController: UIViewController, MKMapViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var linkLinkedin: UITextField!
     @IBOutlet weak var cancel: UIBarButtonItem!
@@ -20,7 +20,8 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        linkLinkedin.text = "Enter a Link to Share Here"
+        self.linkLinkedin.text = "Enter a Link to Share Here"
+        linkLinkedin.delegate = self
         
         self.mapView.delegate = self
     }
@@ -42,9 +43,9 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    @IBAction func submit(_ sender: Any) {
+    @IBAction func submit(_ sender: UIButton) {
         
-      if let url = URL(string: self.linkLinkedin.text!),(UIApplication.shared.canOpenURL(url))
+        if let url = URL(string: self.linkLinkedin.text!),(UIApplication.shared.canOpenURL(url))
         {
             editingMap.mediaURL = linkLinkedin.text!
             MapModel.maplist.append(editingMap)
@@ -58,12 +59,12 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    @IBAction func cancel(_ sender: Any) {
+    @IBAction func cancel(_ sender: UIButton) {
         DispatchQueue.main.async {
             self.dismiss(animated: true, completion: nil)
         }
     }
-       
+    
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         addPinToMap()
     }
@@ -102,6 +103,15 @@ class SearchLocationController: UIViewController, MKMapViewDelegate {
         
         self.mapView.addAnnotation(annotation)
         self.mapView.showAnnotations(self.mapView.annotations, animated: true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }
 
