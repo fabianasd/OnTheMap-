@@ -76,11 +76,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 if let url =  URL(string: toOpen){
                     UIApplication.shared.open(url, options: [:])
                 } else {
-                    let alert = UIAlertController(title: "Error", message: "Not information cadastred", preferredStyle: .alert )
-                    alert.addAction(UIAlertAction (title: "OK", style: .default, handler: { _ in
-                        return
-                    }))
-                    self.present(alert, animated: true, completion: nil)
+                    self.showAlert(title: "Alert", message: "Not information cadastred")
                 }
             }
         }
@@ -96,11 +92,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if(success) {
             addStudentsToMap(locations: maps)
         } else {
-            let alert = UIAlertController(title: "Error", message: "Failed", preferredStyle: .alert )
-            alert.addAction(UIAlertAction (title: "OK", style: .default, handler: { _ in
-                return
-            }))
-            self.present(alert, animated: true, completion: nil)
+            self.showAlert(title: "Alert", message: "Failed")
         }
     }
     
@@ -110,7 +102,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func editingLocation() {
         
-        let alert = UIAlertController(title: "UIAlertController", message: "Would you like to continue learning how to use iOS alerts?", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Alert", message: "Would you like to continue learning how to use iOS alerts?", preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction((UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
             self.performSegue(withIdentifier: "Location", sender: nil)

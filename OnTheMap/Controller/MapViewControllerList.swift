@@ -56,11 +56,7 @@ extension MapViewControllerList: UITableViewDataSource, UITableViewDelegate {
         if let url =  URL(string: data.mediaURL){
             UIApplication.shared.open(url, options: [:])
         } else {
-            let alert = UIAlertController(title: "Error", message: "Failed open URL", preferredStyle: .alert )
-            alert.addAction(UIAlertAction (title: "OK", style: .default, handler: { _ in
-                return
-            }))
-            self.present(alert, animated: true, completion: nil)
+            self.showAlert(title: "Alert", message: "Failed open URL")
         }
     }
     

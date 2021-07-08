@@ -32,10 +32,7 @@ class SearchLocationController: UIViewController, MKMapViewDelegate, UITextField
     
     func handleStudentResponse(studentResponse: StudentResponse?, error: Error?) {
         if let response = error {
-            let alert = UIAlertController(title: "Warning", message: "URL not informed!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in return
-            }))
-            self.present(alert, animated: true, completion: nil)
+            self.showAlert(title: "Warning", message: "URL not informed!")
         } else {
             DispatchQueue.main.async {
                 self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
@@ -52,10 +49,7 @@ class SearchLocationController: UIViewController, MKMapViewDelegate, UITextField
             OTMUser.postStudentLocation(uniqueKey: editingMap.uniqueKey ?? " ", firstName: "On The Map", lastName: editingMap.lastName ?? " ", mapString: editingMap.mapString ?? " ", mediaURL: linkLinkedin.text!, latitude: editingMap.latitude, longitude: editingMap.longitude, completion:handleStudentResponse(studentResponse:error:))
         }
         else {
-            let alert = UIAlertController(title: "Warning", message: "URL not informed correct! Exemple: https://", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in return
-            }))
-            self.present(alert, animated: true, completion: nil)
+            self.showAlert(title: "Warning", message: "URL not informed correct! Exemple: https://")
         }
     }
     
