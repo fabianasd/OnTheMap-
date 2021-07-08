@@ -33,7 +33,7 @@ class OTMUser {
             switch self {
             case .getUser: return Endpoints.base + "/users/\(OTMUser.key)"
             case .createSessionId: return Endpoints.base + "/session"
-            case .getStudentLocation: return Endpoints.base + "/StudentLocation?order=-updatedAt"
+            case .getStudentLocation: return Endpoints.base + "/StudentLocation?limit=100&order=-updatedAt"
             case .postStudentLocation: return Endpoints.base + "/StudentLocation"
             case .putStudentLocation: return Endpoints.base + "/StudentLocation/\(OTMUser.Auth.objectId)"
             case .deleteSession: return Endpoints.base + "/session" //logout

@@ -34,11 +34,6 @@ class MapViewControllerList: UIViewController, MKMapViewDelegate {
 }
 
 extension MapViewControllerList: UITableViewDataSource, UITableViewDelegate {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MapModel.maplist.count
     }
