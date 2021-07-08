@@ -15,6 +15,7 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate, UITextFieldD
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var cancel: UIBarButtonItem!
     @IBOutlet weak var findMap: UIButton!
+    @IBOutlet weak var lodingActivity: UIActivityIndicatorView!
     
     var locationManager:CLLocationManager!
     var userLocation:CLLocation!
@@ -55,6 +56,7 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate, UITextFieldD
     
     @IBAction func findMap(_ sender: UIButton) {
         geocodePosition(newLocation: locationTextField.text!)
+        self.setLoadingIn(true)
     }
     
     @IBAction func cancel(_ sender: Any) {
@@ -101,9 +103,10 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate, UITextFieldD
         CLGeocoder().geocodeAddressString(newLocation) { (newMarker, error) in
             if let error = error {
                 self.showAlert(title: "Location Incorrect", message: "Check the location informed!")
+                self.setLoadingIn(false)
+                print("Location not found.")
             } else {
                 var location: CLLocation?
-                
                 if let marker = newMarker, marker.count > 0 {
                     location = marker.first?.location
                 }
@@ -113,6 +116,7 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate, UITextFieldD
                     self.performSegue(withIdentifier: "search", sender: location)
                 } else {
                     self.showAlert(title: "Alert", message: "Please try again later.")
+                    self.setLoadingIn(false)
                     print("there was an error.")
                 }
             }
@@ -126,5 +130,14 @@ class EditingLocation: UIViewController, CLLocationManagerDelegate, UITextFieldD
             textField.resignFirstResponder()
         }
         return true
+    }
+    
+    func setLoadingIn(_ loadingIn: Bool) {
+        if loadingIn {
+            lodingActivity.startAnimating()
+        } else {
+            lodingActivity.stopAnimating()
+            findMap.isEnabled = !loadingIn
+        }
     }
 }

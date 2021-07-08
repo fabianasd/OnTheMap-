@@ -359,6 +359,11 @@
                                                             <action selector="findMap:" destination="nl5-J1-4XH" eventType="touchUpInside" id="S9s-De-fJW"/>
                                                         </connections>
                                                     </button>
+                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="BZa-Kr-aQW">
+                                                        <rect key="frame" x="177" y="24" width="20" height="116"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="color" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    </activityIndicatorView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -407,6 +412,7 @@
                         <outlet property="cancel" destination="0kX-zf-h80" id="2BM-SM-9iR"/>
                         <outlet property="findMap" destination="YAM-yT-7t2" id="Wou-w7-pjs"/>
                         <outlet property="locationTextField" destination="YPA-g6-stc" id="Zig-QQ-ikz"/>
+                        <outlet property="lodingActivity" destination="BZa-Kr-aQW" id="eSd-7h-5vz"/>
                         <segue destination="hfi-uh-fxX" kind="presentation" identifier="search" id="s66-5f-OHv"/>
                     </connections>
                 </viewController>
